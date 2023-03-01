@@ -1,48 +1,44 @@
-import { useMemo, useState } from "react";
+import {useMemo} from "react";
+import clsx from 'clsx';
 import dayjs from "dayjs";
 import "./App.css";
-import { useCountdown } from "./hooks";
+import {usePomodoro} from "./hooks";
 
-const FOCUS_TIME_MINUTES = 25;
-const FOCUS_TIME_SECONDS = FOCUS_TIME_MINUTES * 60;
-const ONE_SECOND = 1000;
+const FOCUS_TIME_MS = 25 * 60 * 1000;
+const BREAK_TIME_MS = 5 * 60 * 1000;
+const LONG_BREAK_TIME_MS = 30 * 60 * 1000;
+const MOCK_FOCUS_TIME_MS = 5 * 1000;
+const MOCK_BREAK_TIME_MS = 2 * 1000;
 
 function App() {
-  const [counter, isRunning, start, reset, pause, stop] = useCountdown({
-    from: FOCUS_TIME_SECONDS,
-    to: 0,
-    interval: ONE_SECOND,
+  const {isRunning, timeInterval, start, pause, reset, steps} = usePomodoro({
+    focusTimeInterval: MOCK_FOCUS_TIME_MS,
+    breakTimeInterval: MOCK_BREAK_TIME_MS,
+    longBreakTimeInterval: LONG_BREAK_TIME_MS
   });
 
-  const counterToDisplay = useMemo(() => {
-    return dayjs(counter * 1000).format("mm:ss");
-  }, [counter]);
+  const displayTimeInterval = useMemo(() => {
+    return dayjs(timeInterval).format("mm:ss");
+  }, [timeInterval]);
+
+  const handleStart = () => !isRunning ? start() : pause();
 
   return (
     <div className="container">
-      <h1>Pomodoro</h1>
-
-      <div className="row">
-          <img src="/pomodoro.png" className="image pomodoro" alt="Pomodoro image" height="140" />
+      <div className="time">{displayTimeInterval}</div>
+      <div className="progress">
+        {steps.map((step, index) => {
+          return <div className={
+            clsx('progress-item', 
+              step.focus && step.break && 'done' || step.focus && 'focus-done', 
+            )
+          } key={index}></div>
+        })}
       </div>
 
-      {!isRunning && (
-          <p className="mainText">Press "Start" to begin the session</p>
-      )}
-
-      {isRunning && (
-        <p className="mainText time">{counterToDisplay}</p>
-      )}
-
       <div className="row">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            !isRunning ? start(): stop();
-          }}
-        >
-          <button type="submit">{!isRunning ? 'Start' : 'Stop'}</button>
-        </form>
+          <button className="action" type="button" onClick={handleStart}>{!isRunning ? 'Start' : 'Pause'}</button>
+          <button className="action"  type="button" onClick={reset}>Reset</button>
       </div>
     </div>
   );

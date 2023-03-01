@@ -106,13 +106,52 @@ button {
   }
 }
 
-.mainText {
-  margin-top: 8px;
-  margin-bottom: 24px;
-  line-height: 42px;
-}
-
 .time {
   font-size: 32px; 
   font-weight: 500;
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.progress-item {
+  height: 16px;
+  min-height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  border: 2px solid white;
+  box-sizing: border-box;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.progress-half {
+  height: 16px;
+  min-height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  border: 2px solid white;
+  box-sizing: border-box;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.progress-half.focus {
+  height: 100%;
+  background: linear-gradient(90deg, #fff 50%, transparent 50%);
+}
+
+.progress-half.break {
+  height: 100%;
+  background: linear-gradient(90deg, transparent 50%, #fff 50%);
+}
+
+.action {
+  margin-left: 4px;
+  margin-right: 4px;
 }
