@@ -1,47 +1,114 @@
-import {useMemo} from "react";
-import clsx from 'clsx';
-import dayjs from "dayjs";
-import "./App.css";
-import {usePomodoro} from "./hooks";
+import React, { useState, useRef } from "react";
 
-const FOCUS_TIME_MS = 25 * 60 * 1000;
-const BREAK_TIME_MS = 5 * 60 * 1000;
-const LONG_BREAK_TIME_MS = 30 * 60 * 1000;
-const MOCK_FOCUS_TIME_MS = 5 * 1000;
-const MOCK_BREAK_TIME_MS = 2 * 1000;
+const FOCUS_TIME = 5;
+const SHORT_BREAK_TIME = 2;
+const LONG_BREAK_TIME = 10;
+const CYCLES = 4;
 
-function App() {
-  const {isRunning, timeInterval, start, pause, reset, steps} = usePomodoro({
-    focusTimeInterval: MOCK_FOCUS_TIME_MS,
-    breakTimeInterval: MOCK_BREAK_TIME_MS,
-    longBreakTimeInterval: LONG_BREAK_TIME_MS
-  });
+const formatTime = (time: number): string => {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  return `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}`;
+};
 
-  const displayTimeInterval = useMemo(() => {
-    return dayjs(timeInterval).format("mm:ss");
-  }, [timeInterval]);
+const App: React.FC = () => {
+  const [cycle, setCycle] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(FOCUS_TIME);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [isPaused, setIsPaused] = useState(true);
+  const [isBreak, setIsBreak] = useState(false);
 
-  const handleStart = () => !isRunning ? start() : pause();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startTimer = () => {
+    setIsPaused(false);
+    if (cycle === 0) {
+      setCycle(1);
+    }
+    const id = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime === 0) {
+          clearInterval(intervalRef.current as NodeJS.Timeout);
+          if (isBreak) {
+            setCycle((prevCycle) => {
+              if (prevCycle === CYCLES) {
+                return 1;
+              }
+              return prevCycle + 1;
+            });
+            setIsBreak(false);
+            setTimeLeft(FOCUS_TIME);
+            setIsPaused(true);
+          } else {
+            setIsBreak(true);
+            setTimeLeft(cycle !== 4 ? SHORT_BREAK_TIME : LONG_BREAK_TIME);
+            setIsPaused(true);
+          }
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+    setIntervalId(id);
+    intervalRef.current = id;
+  };
+
+  const pauseTimer = () => {
+    setIsPaused(true);
+    clearInterval(intervalRef.current as NodeJS.Timeout);
+  };
+
+  const resumeTimer = () => {
+    startTimer();
+  };
+
+  const resetTimer = () => {
+    setCycle(0);
+    setTimeLeft(FOCUS_TIME);
+    setIsBreak(false);
+    clearInterval(intervalRef.current as NodeJS.Timeout);
+    setIsPaused(true);
+  };
+
+  const handleStartClick = () => {
+    startTimer();
+  };
+
+  const handlePauseClick = () => {
+    pauseTimer();
+  };
+
+  const handleResumeClick = () => {
+    resumeTimer();
+  };
+
+  const handleResetClick = () => {
+    resetTimer();
+  };
+
+  console.log({isPaused})
 
   return (
     <div className="container">
-      <div className="time">{displayTimeInterval}</div>
-      <div className="progress">
-        {steps.map((step, index) => {
-          return <div className={
-            clsx('progress-item', 
-              step.focus && step.break && 'done' || step.focus && 'focus-done', 
-            )
-          } key={index}></div>
-        })}
+      <div className="timer-info">
+      {cycle !== 0 && <div>Cycle: {cycle}</div>}
+      {cycle !== 0 && <div>{isBreak ? "Break Time" : "Focus Time"}</div>}
       </div>
-
+      <div className="time">
+        <div>{formatTime(timeLeft)}</div>
+      </div>
+      <div className="progress">
+        
+      </div>
       <div className="row">
-          <button className="action" type="button" onClick={handleStart}>{!isRunning ? 'Start' : 'Pause'}</button>
-          <button className="action"  type="button" onClick={reset}>Reset</button>
+        <button className="action" onClick={isPaused ? handleStartClick : handlePauseClick}>
+          {isPaused ? 'Play' : 'Pause'}
+        </button>
+        <button className="action" onClick={handleResetClick}>Reset</button>
       </div>
     </div>
   );
-}
+};
 
 export default App;

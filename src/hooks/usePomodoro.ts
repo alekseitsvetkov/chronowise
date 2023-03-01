@@ -1,77 +1,87 @@
 import {useEffect, useState} from 'react'
 
 interface IUsePomodoroProps {
-  focusTimeInterval: number
-  breakTimeInterval: number
-  longBreakTimeInterval: number
+  focusTime: number
+  shortBreakTime: number
+  longBreakTime: number
+  cycles: number
 }
 
-interface IPomodoroStep {
-  focus: boolean;
-  break: boolean;
-  focusTimeInterval: number;
-  breakTimeInterval: number;
+export enum TimerType {
+  Pomodoro,
+  ShortBreak,
+  LongBreak,
 }
 
-export const usePomodoro = ({focusTimeInterval, breakTimeInterval, longBreakTimeInterval}: IUsePomodoroProps) => {
-  const DEFAULT_STEPS: IPomodoroStep[] = [
-    {
-      focus: false,
-      break: false,
-      focusTimeInterval,
-      breakTimeInterval
-    },
-    {
-      focus: false,
-      break: false,
-      focusTimeInterval,
-      breakTimeInterval
-    },
-    {
-      focus: false,
-      break: false,
-      focusTimeInterval,
-      breakTimeInterval
-    },
-    {
-      focus: false,
-      break: false,
-      focusTimeInterval,
-      breakTimeInterval: longBreakTimeInterval
-    }
-  ]
-
-  const [isRunning, setIsRunning] = useState(false)
-  const [steps, setSteps] = useState<IPomodoroStep[]>(DEFAULT_STEPS)
-  const [currentTimeInterval, setCurrentTimeInterval] = useState(focusTimeInterval)
-  
-  const start = () => {
-    setIsRunning(true)
-  }
-
-  const pause = () => {
-    setIsRunning(false)
-  }
-
-  const reset = () => {
-    setIsRunning(false)
-    setCurrentTimeInterval(focusTimeInterval)
-    setSteps(DEFAULT_STEPS)
-  }
+export const usePomodoro = ({focusTime, shortBreakTime, longBreakTime, cycles}: IUsePomodoroProps) => {
+  const [timerType, setTimerType] = useState<TimerType>(TimerType.Pomodoro);
+  const [cycle, setCycle] = useState(1);
+  const [timeLeft, setTimeLeft] = useState(focusTime);
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    if (isRunning) {
-      const interval = setInterval(() => {
-        setCurrentTimeInterval(currentTimeInterval - 1000)
-      }, 1000)
+    let intervalId: NodeJS.Timeout;
 
-      
-      return () => clearInterval(interval)
+    const startTimer = () => {
+      setIsRunning(true);
+      intervalId = setInterval(() => {
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
+      }, 1000);
+    };
+
+    const stopTimer = () => {
+      setIsRunning(false);
+      clearInterval(intervalId);
+    };
+
+    const resetTimer = () => {
+      setIsRunning(false);
+      setTimerType(TimerType.Pomodoro);
+      setCycle(1);
+      setTimeLeft(focusTime);
+    };
+
+    if (timeLeft === 0) {
+      if (timerType === TimerType.Pomodoro) {
+        if (cycle === cycles) {
+          setCycle(1);
+          setTimerType(TimerType.LongBreak);
+          setTimeLeft(longBreakTime);
+        } else {
+          setCycle(cycle + 1);
+          setTimerType(TimerType.ShortBreak);
+          setTimeLeft(shortBreakTime);
+        }
+      } else {
+        setTimerType(TimerType.Pomodoro);
+        setTimeLeft(focusTime);
+      }
     }
-  }, [isRunning, currentTimeInterval])
+
+    if (isRunning) {
+      startTimer();
+    } else {
+      stopTimer();
+    }
+
+    return resetTimer;
+  }, [timeLeft, isRunning, cycle, timerType]);
+
+  const handleStart = () => {
+    setIsRunning(true);
+  };
+
+  const handlePause = () => {
+    setIsRunning(false);
+  };
 
   return {
-    isRunning, timeInterval: currentTimeInterval, start, pause, reset, steps
+    isRunning,
+    timerType,
+    timeLeft,
+    cycle,
+    start: handleStart,
+    pause: handlePause,
   }
 }
 
