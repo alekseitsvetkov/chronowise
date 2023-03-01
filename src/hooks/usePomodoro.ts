@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 
 interface IUsePomodoroProps {
   focusTime: number
@@ -14,74 +14,85 @@ export enum TimerType {
 }
 
 export const usePomodoro = ({focusTime, shortBreakTime, longBreakTime, cycles}: IUsePomodoroProps) => {
-  const [timerType, setTimerType] = useState<TimerType>(TimerType.Pomodoro);
   const [cycle, setCycle] = useState(1);
   const [timeLeft, setTimeLeft] = useState(focusTime);
-  const [isRunning, setIsRunning] = useState(false);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [isPaused, setIsPaused] = useState(true);
+  const [isBreak, setIsBreak] = useState(false);
 
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-    const startTimer = () => {
-      setIsRunning(true);
-      intervalId = setInterval(() => {
-        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-      }, 1000);
-    };
-
-    const stopTimer = () => {
-      setIsRunning(false);
-      clearInterval(intervalId);
-    };
-
-    const resetTimer = () => {
-      setIsRunning(false);
-      setTimerType(TimerType.Pomodoro);
-      setCycle(1);
-      setTimeLeft(focusTime);
-    };
-
-    if (timeLeft === 0) {
-      if (timerType === TimerType.Pomodoro) {
-        if (cycle === cycles) {
-          setCycle(1);
-          setTimerType(TimerType.LongBreak);
-          setTimeLeft(longBreakTime);
-        } else {
-          setCycle(cycle + 1);
-          setTimerType(TimerType.ShortBreak);
-          setTimeLeft(shortBreakTime);
+  const startTimer = () => {
+    setIsPaused(false);
+    const id = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime === 0) {
+          clearInterval(intervalRef.current as NodeJS.Timeout);
+          if (isBreak) {
+            setCycle((prevCycle) => {
+              if (prevCycle === cycles) {
+                return 1;
+              }
+              return prevCycle + 1;
+            });
+            setIsBreak(false);
+            setTimeLeft(focusTime);
+            setIsPaused(true);
+          } else {
+            setIsBreak(true);
+            setTimeLeft(cycle !== 4 ? shortBreakTime : longBreakTime);
+            setIsPaused(true);
+          }
         }
-      } else {
-        setTimerType(TimerType.Pomodoro);
-        setTimeLeft(focusTime);
-      }
-    }
-
-    if (isRunning) {
-      startTimer();
-    } else {
-      stopTimer();
-    }
-
-    return resetTimer;
-  }, [timeLeft, isRunning, cycle, timerType]);
-
-  const handleStart = () => {
-    setIsRunning(true);
+        return prevTime - 1;
+      });
+    }, 1000);
+    setIntervalId(id);
+    intervalRef.current = id;
   };
 
-  const handlePause = () => {
-    setIsRunning(false);
+  const pauseTimer = () => {
+    setIsPaused(true);
+    clearInterval(intervalRef.current as NodeJS.Timeout);
+  };
+
+  const resumeTimer = () => {
+    startTimer();
+  };
+
+  const resetTimer = () => {
+    setCycle(1);
+    setTimeLeft(focusTime);
+    setIsBreak(false);
+    clearInterval(intervalRef.current as NodeJS.Timeout);
+    setIsPaused(true);
+  };
+
+  const handleStartClick = () => {
+    startTimer();
+  };
+
+  const handlePauseClick = () => {
+    pauseTimer();
+  };
+
+  const handleResumeClick = () => {
+    resumeTimer();
+  };
+
+  const handleResetClick = () => {
+    resetTimer();
   };
 
   return {
-    isRunning,
-    timerType,
-    timeLeft,
     cycle,
-    start: handleStart,
-    pause: handlePause,
+    isBreak,
+    isPaused,
+    timeLeft,
+    start: handleStartClick,
+    pause: handlePauseClick,
+    resume: handleResumeClick,
+    reset: handleResetClick
   }
 }
 

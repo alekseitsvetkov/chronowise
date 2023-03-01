@@ -1,111 +1,55 @@
-import React, { useState, useRef } from "react";
+import clsx from "clsx";
+import {FC} from "react";
+import {usePomodoro} from "./hooks";
+import {secondsToTime} from "./utils";
 
-const FOCUS_TIME = 5;
-const SHORT_BREAK_TIME = 2;
-const LONG_BREAK_TIME = 10;
+const FOCUS_TIME = 25 * 60;
+const SHORT_BREAK_TIME = 5 * 60;
+const LONG_BREAK_TIME = 30 * 60;
 const CYCLES = 4;
 
-const formatTime = (time: number): string => {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  return `${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}`;
-};
-
-const App: React.FC = () => {
-  const [cycle, setCycle] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(FOCUS_TIME);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
-  const [isPaused, setIsPaused] = useState(true);
-  const [isBreak, setIsBreak] = useState(false);
-
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  const startTimer = () => {
-    setIsPaused(false);
-    if (cycle === 0) {
-      setCycle(1);
-    }
-    const id = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime === 0) {
-          clearInterval(intervalRef.current as NodeJS.Timeout);
-          if (isBreak) {
-            setCycle((prevCycle) => {
-              if (prevCycle === CYCLES) {
-                return 1;
-              }
-              return prevCycle + 1;
-            });
-            setIsBreak(false);
-            setTimeLeft(FOCUS_TIME);
-            setIsPaused(true);
-          } else {
-            setIsBreak(true);
-            setTimeLeft(cycle !== 4 ? SHORT_BREAK_TIME : LONG_BREAK_TIME);
-            setIsPaused(true);
-          }
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-    setIntervalId(id);
-    intervalRef.current = id;
-  };
-
-  const pauseTimer = () => {
-    setIsPaused(true);
-    clearInterval(intervalRef.current as NodeJS.Timeout);
-  };
-
-  const resumeTimer = () => {
-    startTimer();
-  };
-
-  const resetTimer = () => {
-    setCycle(0);
-    setTimeLeft(FOCUS_TIME);
-    setIsBreak(false);
-    clearInterval(intervalRef.current as NodeJS.Timeout);
-    setIsPaused(true);
-  };
-
-  const handleStartClick = () => {
-    startTimer();
-  };
-
-  const handlePauseClick = () => {
-    pauseTimer();
-  };
-
-  const handleResumeClick = () => {
-    resumeTimer();
-  };
-
-  const handleResetClick = () => {
-    resetTimer();
-  };
-
-  console.log({isPaused})
+const App: FC = () => {
+  const {
+    cycle,
+    isBreak,
+    isPaused,
+    timeLeft,
+    start,
+    pause,
+    resume,
+    reset
+  } = usePomodoro({
+    focusTime: FOCUS_TIME,
+    shortBreakTime: SHORT_BREAK_TIME,
+    longBreakTime: LONG_BREAK_TIME,
+    cycles: CYCLES
+  });
 
   return (
     <div className="container">
       <div className="timer-info">
-      {cycle !== 0 && <div>Cycle: {cycle}</div>}
-      {cycle !== 0 && <div>{isBreak ? "Break Time" : "Focus Time"}</div>}
+        <div>{isBreak ? "Break Time" : "Focus Time"}</div>
       </div>
       <div className="time">
-        <div>{formatTime(timeLeft)}</div>
+        <div>{secondsToTime(timeLeft)}</div>
       </div>
       <div className="progress">
-        
+        {Array.from({ length: CYCLES }, (_, i) => (
+          <div
+            key={i} 
+            className={clsx("progress-item",
+              cycle - 1 >= i && "half",
+              cycle - 1 >= i && isBreak && "done",
+              cycle - 1 >= i + 1 && "done",
+            )}
+          />
+        ))}
       </div>
       <div className="row">
-        <button className="action" onClick={isPaused ? handleStartClick : handlePauseClick}>
+        <button className="action" onClick={isPaused ? start : pause}>
           {isPaused ? 'Play' : 'Pause'}
         </button>
-        <button className="action" onClick={handleResetClick}>Reset</button>
+        <button className="action" onClick={reset}>Reset</button>
       </div>
     </div>
   );
