@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@heroicons/react': ^2.0.16
   '@tauri-apps/api': ^1.2.0
   '@tauri-apps/cli': ^1.2.2
   '@types/node': ^18.7.10
@@ -15,6 +16,7 @@ specifiers:
   vite: ^4.0.0
 
 dependencies:
+  '@heroicons/react': 2.0.16_react@18.2.0
   '@tauri-apps/api': 1.2.0
   clsx: 1.2.1
   dayjs: 1.11.7
@@ -457,6 +459,14 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@heroicons/react/2.0.16_react@18.2.0:
+    resolution: {integrity: sha512-x89rFxH3SRdYaA+JCXwfe+RkE1SFTo9GcOkZettHer71Y3T7V+ogKmfw5CjTazgS3d0ClJ7p1NA+SP7VQLQcLw==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}

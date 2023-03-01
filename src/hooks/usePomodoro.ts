@@ -7,6 +7,7 @@ interface IUsePomodoroProps {
   shortBreakTime: number
   longBreakTime: number
   cycles: number
+  playSound: () => void
 }
 
 export enum TimerType {
@@ -15,7 +16,7 @@ export enum TimerType {
   LongBreak,
 }
 
-export const usePomodoro = ({focusTime, shortBreakTime, longBreakTime, cycles}: IUsePomodoroProps) => {
+export const usePomodoro = ({focusTime, shortBreakTime, longBreakTime, cycles, playSound}: IUsePomodoroProps) => {
   const [cycle, setCycle] = useState(1);
   const [timeLeft, setTimeLeft] = useState(focusTime);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
@@ -40,14 +41,17 @@ export const usePomodoro = ({focusTime, shortBreakTime, longBreakTime, cycles}: 
             setIsBreak(false);
             setTimeLeft(focusTime);
             setIsPaused(true);
+            playSound();
             sendNotification({
               title: NOTIFICATION_TITLE,
               body: FOCUS_TIME_NOTIFICATION,
             });
+            
           } else {
             setIsBreak(true);
             setTimeLeft(cycle !== 4 ? shortBreakTime : longBreakTime);
             setIsPaused(true);
+            playSound();
             sendNotification({
               title: NOTIFICATION_TITLE,
               body: BREAK_TIME_NOTIFICATION,
