@@ -16,6 +16,9 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "notification": {
+        "all": true
       }
     },
     "bundle": {
@@ -60,10 +63,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 400,
-        "resizable": true,
+        "height": 300,
+        "resizable": false,
         "title": "pomodoro",
-        "width": 560
+        "width": 300
       }
     ],
     "systemTray": {

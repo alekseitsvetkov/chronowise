@@ -1,4 +1,6 @@
-import {useEffect, useRef, useState} from 'react'
+import {sendNotification} from '@tauri-apps/api/notification'
+import {useRef, useState} from 'react'
+import { BREAK_TIME_NOTIFICATION, FOCUS_TIME_NOTIFICATION, NOTIFICATION_TITLE } from '../constants'
 
 interface IUsePomodoroProps {
   focusTime: number
@@ -38,10 +40,18 @@ export const usePomodoro = ({focusTime, shortBreakTime, longBreakTime, cycles}: 
             setIsBreak(false);
             setTimeLeft(focusTime);
             setIsPaused(true);
+            sendNotification({
+              title: NOTIFICATION_TITLE,
+              body: FOCUS_TIME_NOTIFICATION,
+            });
           } else {
             setIsBreak(true);
             setTimeLeft(cycle !== 4 ? shortBreakTime : longBreakTime);
             setIsPaused(true);
+            sendNotification({
+              title: NOTIFICATION_TITLE,
+              body: BREAK_TIME_NOTIFICATION,
+            });
           }
         }
         return prevTime - 1;
