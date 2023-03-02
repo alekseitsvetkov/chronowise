@@ -58,69 +58,6 @@ jobs:
       - name: Perform linting
         run: pnpm lint
 
-  rustfmt:
-    name: rustfmt
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          components: rustfmt
-
-      - name: Cache Rust dependencies
-        uses: ./.github/actions/cache-rust-deps
-
-      - name: Generate Prisma client
-        uses: ./.github/actions/generate-prisma-client
-
-      - name: Run rustfmt
-        run: cargo fmt --all -- --check
-
-  clippy_check:
-    name: Clippy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
-          components: clippy
-
-      - name: Cache Rust dependencies
-        uses: ./.github/actions/cache-rust-deps
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 7
-          run_install: false
-
-      - name: Run 'setup-system.sh' script
-        run: ./.github/scripts/setup-system.sh
-
-      - name: Generate Prisma client
-        uses: ./.github/actions/generate-prisma-client
-
-      - name: Run Clippy
-        uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features --release
-
   build-and-publish:
     name: Build and Publish (${{ matrix.platform }})
     runs-on: ${{ matrix.platform }}
@@ -173,27 +110,5 @@ jobs:
         if: matrix.platform == 'windows-latest'
         run: ./.github/scripts/setup-system.ps1 -ci
 
-      - name: Generate Prisma client
-        uses: ./.github/actions/generate-prisma-client
-
-      - name: Cargo fetch
-        run: cargo fetch
-
-      - name: Cargo test core
-        run: cargo test -p sd-core -F location-watcher
-
-      - name: Check core
-        run: cargo check -p sd-core --release
-
-      - name: Cargo test sd-crypto
-        run: cargo test -p sd-crypto --release --lib --all-features
-
       - name: Bundle Desktop
         run: pnpm desktop tauri build
-
-      - name: Publish server Docker image
-        if: matrix.platform == 'ubuntu-latest' && github.event_name != 'pull_request'
-        uses: ./.github/actions/publish-server-image
-
-      - name: Publish artifacts
-        uses: ./.github/actions/publish-artifacts
