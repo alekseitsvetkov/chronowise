@@ -9,6 +9,9 @@ on:
       - '**/.md'
   workflow_dispatch:
 
+env:
+  KAROSHI_CUSTOM_APT_FLAGS: --no-install-recommends
+
 jobs:
   typescript:
     name: TypeScript
