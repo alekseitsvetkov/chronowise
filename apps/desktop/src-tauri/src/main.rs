@@ -12,7 +12,7 @@ fn greet(name: &str) -> String {
 }
 
 fn main() {
-    let about = CustomMenuItem::new("about".to_string(), "About Karoshi");
+    let about = CustomMenuItem::new("about".to_string(), "About Chronosphere");
     let settings = CustomMenuItem::new("settings".to_string(), "Settings");
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let tray_menu = SystemTrayMenu::new()

@@ -12,39 +12,39 @@ runs:
       if: matrix.platform == 'ubuntu-latest'
       shell: bash
       run: |
-        chmod +x ./target/release/bundle/appimage/karoshi*.AppImage
-        tar -czvf ./Karoshi-AppImage-${{ env.GITHUB_SHA_SHORT }}.tar.gz ./target/release/bundle/appimage/karoshi*.AppImage
+        chmod +x ./target/release/bundle/appimage/chronosphere*.AppImage
+        tar -czvf ./Chronosphere-AppImage-${{ env.GITHUB_SHA_SHORT }}.tar.gz ./target/release/bundle/appimage/chronosphere*.AppImage
     - name: Publish artifacts (AppImage)
       if: matrix.platform == 'ubuntu-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: Karoshi-AppImage-${{ env.GITHUB_SHA_SHORT }}
-        path: ./Karoshi-AppImage-${{ env.GITHUB_SHA_SHORT }}.tar.gz
+        name: Chronosphere-AppImage-${{ env.GITHUB_SHA_SHORT }}
+        path: ./Chronosphere-AppImage-${{ env.GITHUB_SHA_SHORT }}.tar.gz
 
     - name: Publish artifacts (deb)
       if: matrix.platform == 'ubuntu-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: Karoshi-deb-${{ env.GITHUB_SHA_SHORT }}
-        path: ./target/release/bundle/deb/karoshi*.deb
+        name: Chronosphere-deb-${{ env.GITHUB_SHA_SHORT }}
+        path: ./target/release/bundle/deb/chronosphere*.deb
 
     - name: Publish artifacts (server)
       if: matrix.platform == 'ubuntu-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: Karoshi-server-${{ env.GITHUB_SHA_SHORT }}
+        name: Chronosphere-server-${{ env.GITHUB_SHA_SHORT }}
         path: ./target/release/server
 
     - name: Publish artifacts (Windows)
       if: matrix.platform == 'windows-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: Karoshi-Windows-${{ env.GITHUB_SHA_SHORT }}
+        name: Chronosphere-Windows-${{ env.GITHUB_SHA_SHORT }}
         path: .\target\release\bundle\msi\*.msi
 
     - name: Publish artifacts (macOS)
       if: matrix.platform == 'macos-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: Karoshi-macOS-${{ env.GITHUB_SHA_SHORT }}
+        name: Chronosphere-macOS-${{ env.GITHUB_SHA_SHORT }}
         path: ./target/release/bundle/macos/*.app

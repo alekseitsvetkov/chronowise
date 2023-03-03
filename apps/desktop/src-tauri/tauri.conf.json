@@ -2,12 +2,12 @@
 	"build": {
 		"beforeDevCommand": "pnpm dev",
 		"beforeBuildCommand": "pnpm build",
-		"devPath": "http://localhost:1420",
+		"devPath": "http://localhost:8001",
 		"distDir": "../dist",
 		"withGlobalTauri": false
 	},
 	"package": {
-		"productName": "karoshi",
+		"productName": "chronosphere",
 		"version": "1.0.0"
 	},
 	"tauri": {
@@ -65,7 +65,7 @@
 				"fullscreen": false,
 				"height": 300,
 				"resizable": false,
-				"title": "karoshi",
+				"title": "chronosphere",
 				"width": 300
 			}
 		],

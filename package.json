@@ -1,12 +1,12 @@
 {
-	"name": "@karoshi/root",
+	"name": "@chronosphere/root",
 	"version": "1.0.0",
 	"main": "index.ts",
 	"private": true,
 	"scripts": {
 		"build": "turbo run build",
 		"format": "prettier --write .",
-		"desktop": "pnpm --filter @karoshi/desktop --",
+		"desktop": "pnpm --filter @chronosphere/desktop --",
 		"typecheck": "turbo run typecheck",
 		"lint": "turbo run lint",
 		"lint:fix": "turbo run lint -- --fix",
