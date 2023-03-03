@@ -62,6 +62,8 @@ jobs:
         run: pnpm lint
 
   build-and-publish:
+    permissions:
+      contents: write
     name: Build and Publish (${{ matrix.platform }})
     runs-on: ${{ matrix.platform }}
     strategy:
@@ -115,3 +117,6 @@ jobs:
 
       - name: Bundle Desktop
         run: pnpm desktop tauri build
+
+      - name: Publish artifacts
+        uses: ./.github/actions/publish-artifacts

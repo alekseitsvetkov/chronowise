@@ -1842,8 +1842,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "pomodoro"
-version = "0.0.0"
+name = "karoshi"
+version = "1.0.0"
 dependencies = [
  "serde",
  "serde_json",

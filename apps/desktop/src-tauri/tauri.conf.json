@@ -7,8 +7,8 @@
 		"withGlobalTauri": false
 	},
 	"package": {
-		"productName": "pomodoro",
-		"version": "0.0.0"
+		"productName": "karoshi",
+		"version": "1.0.0"
 	},
 	"tauri": {
 		"allowlist": {
@@ -65,7 +65,7 @@
 				"fullscreen": false,
 				"height": 300,
 				"resizable": false,
-				"title": "pomodoro",
+				"title": "karoshi",
 				"width": 300
 			}
 		],
