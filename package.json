@@ -1,6 +1,7 @@
 {
 	"name": "@karoshi/root",
 	"version": "1.0.0",
+	"main": "index.ts",
 	"private": true,
 	"scripts": {
 		"build": "turbo run build",
