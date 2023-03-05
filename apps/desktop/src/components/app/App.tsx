@@ -1,29 +1,24 @@
 import clsx from "clsx";
-import { FC, RefObject, useCallback, useRef } from "react";
-import { PlayIcon, PauseIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
+import { FC } from "react";
 import { useChronosphere } from "~/hooks";
 import { secondsToTime } from "~/utils";
+import { Icons } from "@chronosphere/ui";
+import { Line } from "rc-progress";
 
-const FOCUS_TIME = 25 * 60;
-const SHORT_BREAK_TIME = 5 * 60;
-const LONG_BREAK_TIME = 30 * 60;
+const FOCUS_TIME = 5;
+const SHORT_BREAK_TIME = 2;
+const LONG_BREAK_TIME = 10;
 const CYCLES = 4;
 
 export const App: FC = () => {
-  const audioRef: RefObject<HTMLAudioElement> = useRef(null);
-
-  const playSound = useCallback(() => {
-    audioRef?.current?.play();
-  }, [audioRef]);
-
   const {
     cycle,
     isBreak,
     isPaused,
     timeLeft,
+    percentLeft,
     start,
     pause,
-    resume,
     reset
   } = useChronosphere({
     focusTime: FOCUS_TIME,
@@ -33,33 +28,43 @@ export const App: FC = () => {
   });
 
   return (
-    <div className="container">
-      <div className="text timer-info">
-        <div>{isBreak ? "Break Time" : "Focus Time"}</div>
+    <div className="bg-app h-screen flex flex-col p-4 justify-between">
+      <div className="flex justify-between">
+        <div onClick={reset}>
+          <Icons.reset size={20} color="#FFFFFF" />
+        </div>
+        <div onClick={() => { }}>
+          <Icons.moreHorizontal size={20} color="#FFFFFF" />
+        </div>
       </div>
-      <div className="text time">
-        <div>{secondsToTime(timeLeft)}</div>
+      <div className="flex flex-row justify-between items-end pt-2">
+        <div>
+          <div className="text-ink-dull font-medium leading-5">{isBreak ? "Break" : "Focus"}</div>
+          <div className="pt-4 pb-2 flex flex-row">
+            {Array.from({ length: CYCLES }, (_, i) => (
+              <div
+                key={i}
+                className={clsx("progress-item border-2 rounded-full w-3 h-3 mr-2",
+                  cycle - 1 >= i && "half",
+                  cycle - 1 >= i && isBreak && "done",
+                  cycle - 1 >= i + 1 && "done",
+                )}
+              />
+            ))}
+          </div>
+          <div className="text-5xl font-semibold text-ink leading-10 pt-4">{secondsToTime(timeLeft)}</div>
+        </div>
+        <div className="flex items-center">
+          <div onClick={isPaused ? start : pause}>
+            {isPaused ? <Icons.play size={24} color="#4AE485" fill="#4AE485" /> : <Icons.pause size={24} color="#4AE485" fill="#4AE485" />}
+          </div>
+        </div>
       </div>
-      <div className="progress">
-        {Array.from({ length: CYCLES }, (_, i) => (
-          <div
-            key={i}
-            className={clsx("progress-item",
-              cycle - 1 >= i && "half",
-              cycle - 1 >= i && isBreak && "done",
-              cycle - 1 >= i + 1 && "done",
-            )}
-          />
-        ))}
-      </div>
-      <div className="row">
-        <button className="action" onClick={isPaused ? start : pause}>
-          {isPaused ? <PlayIcon height={30} width={30} /> : <PauseIcon height={30} width={30} />}
-        </button>
-        <button className="action" onClick={reset}>
-          <ArrowPathIcon height={30} width={30} />
-        </button>
-      </div>
+      <Line
+        percent={percentLeft}
+        strokeColor={percentLeft === 0 ? "transparent" : "#4AE485"}
+        trailColor="rgba(255,255,255,0.5)"
+      />
     </div>
   );
 };

@@ -13,16 +13,11 @@ module.exports = function (app, options) {
 			'../../interface/**/*.{ts,tsx,html}',
 			app ? `../../apps/${app}/src/**/*.{ts,tsx,html}` : `./src/**/*.{ts,tsx,html}`
 		],
-		darkMode: app == 'landing' ? 'class' : 'media',
+		darkMode: 'media',
 		mode: 'jit',
 		theme: {
-			screens: {
-				xs: '475px',
-				sm: '650px',
-				md: '868px',
-				lg: '1024px',
-				xl: '1280px',
-				...defaultTheme.screens
+			fontFamily: {
+				inter: ["Arial", "sans-serif"],
 			},
 			fontSize: {
 				'tiny': '.65rem',
@@ -160,9 +155,5 @@ module.exports = function (app, options) {
 			require('tailwindcss-radix')()
 		]
 	};
-	if (app === 'landing') {
-		config.plugins.push(require('@tailwindcss/typography'));
-		config.plugins.push(require('@tailwindcss/line-clamp'));
-	}
 	return config;
 };

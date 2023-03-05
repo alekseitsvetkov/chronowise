@@ -1,5 +1,5 @@
 import {sendNotification} from '@tauri-apps/api/notification'
-import {useRef, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import { BREAK_TIME_NOTIFICATION, FOCUS_TIME_NOTIFICATION, NOTIFICATION_TITLE } from '../constants'
 
 interface IUsePomodoroProps {
@@ -21,6 +21,7 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [isPaused, setIsPaused] = useState(true);
   const [isBreak, setIsBreak] = useState(false);
+  const [percentLeft, setPercentLeft] = useState(0);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -40,7 +41,6 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
             setIsBreak(false);
             setTimeLeft(focusTime);
             setIsPaused(true);
-            playSound();
             sendNotification({
               title: NOTIFICATION_TITLE,
               body: FOCUS_TIME_NOTIFICATION,
@@ -50,7 +50,6 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
             setIsBreak(true);
             setTimeLeft(cycle !== 4 ? shortBreakTime : longBreakTime);
             setIsPaused(true);
-            playSound();
             sendNotification({
               title: NOTIFICATION_TITLE,
               body: BREAK_TIME_NOTIFICATION,
@@ -63,6 +62,12 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
     setIntervalId(id);
     intervalRef.current = id;
   };
+
+  useEffect(() => {
+    const currentTimerTime = isBreak ? (cycle !== 4 ? shortBreakTime : longBreakTime): focusTime;
+    
+    setPercentLeft(100 - (timeLeft / currentTimerTime) * 100);
+  }, [timeLeft])
 
   const pauseTimer = () => {
     setIsPaused(true);
@@ -102,6 +107,7 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
     isBreak,
     isPaused,
     timeLeft,
+    percentLeft,
     start: handleStartClick,
     pause: handlePauseClick,
     resume: handleResumeClick,

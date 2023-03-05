@@ -18,7 +18,6 @@
     "module": "ESNext",
     "target": "ESNext",
     "types": [
-      "vite-plugin-svgr/client",
       "vite/client"
     ]
   }
