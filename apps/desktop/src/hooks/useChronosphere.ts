@@ -7,7 +7,6 @@ interface IUsePomodoroProps {
   shortBreakTime: number
   longBreakTime: number
   cycles: number
-  playSound: () => void
 }
 
 export enum TimerType {
@@ -16,7 +15,7 @@ export enum TimerType {
   LongBreak,
 }
 
-export const usePomodoro = ({focusTime, shortBreakTime, longBreakTime, cycles, playSound}: IUsePomodoroProps) => {
+export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycles}: IUsePomodoroProps) => {
   const [cycle, setCycle] = useState(1);
   const [timeLeft, setTimeLeft] = useState(focusTime);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);

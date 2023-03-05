@@ -13,7 +13,7 @@ module.exports = {
 		// external packages
 		'^([A-Za-z]|@[^s/])',
     // app packages
-		'^@sd/(ui)(/.*)?$',
+		'^@chronosphere/(ui)(/.*)?$',
 		// this package
 		'^~/',
 		// relative

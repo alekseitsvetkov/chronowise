@@ -4,5 +4,8 @@
 		{
 			"path": "apps/desktop"
 		},
+		{
+			"path": "packages/ui"
+		}
 	]
 }
