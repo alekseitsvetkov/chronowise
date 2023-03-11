@@ -78,8 +78,7 @@
 				"resizable": false,
 				"title": "chronosphere",
 				"width": 300,
-				"transparent": true,
-				"decorations": false
+				"transparent": true
 			}
 		],
 		"macOSPrivateApi": true,
