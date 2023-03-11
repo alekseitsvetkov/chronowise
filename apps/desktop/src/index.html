@@ -8,6 +8,23 @@
   </head>
 
   <body>
+    <div data-tauri-drag-region class="titlebar">
+      <div class="titlebar-button" id="titlebar-minimize">
+        <img
+          src="https://api.iconify.design/mdi:window-minimize.svg?color=white"
+          alt="minimize"
+        />
+      </div>
+      <div class="titlebar-button" id="titlebar-maximize">
+        <img
+          src="https://api.iconify.design/mdi:window-maximize.svg?color=gray"
+          alt="maximize"
+        />
+      </div>
+      <div class="titlebar-button titlebar-button--close" id="titlebar-close">
+        <img src="https://api.iconify.design/mdi:close.svg?color=white" alt="close" />
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

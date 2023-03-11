@@ -5,9 +5,9 @@ import { secondsToTime } from "~/utils";
 import { Icons } from "@chronosphere/ui";
 import { Line } from "rc-progress";
 
-const FOCUS_TIME = 5;
-const SHORT_BREAK_TIME = 2;
-const LONG_BREAK_TIME = 10;
+const FOCUS_TIME = 25 * 60;
+const SHORT_BREAK_TIME = 5 * 60;
+const LONG_BREAK_TIME = 15 * 60;
 const CYCLES = 4;
 
 export const App: FC = () => {
@@ -28,7 +28,7 @@ export const App: FC = () => {
   });
 
   return (
-    <div className="bg-app h-screen flex flex-col p-4 justify-between">
+    <div className="bg-app h-screen flex flex-col p-4 justify-between pt-12">
       <div className="flex justify-between">
         <div onClick={reset}>
           <Icons.reset size={20} color="#FFFFFF" />

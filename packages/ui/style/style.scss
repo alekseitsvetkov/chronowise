@@ -9,25 +9,48 @@ body {
 	font-family: Inter, sans-serif;
 }
 
+.titlebar {
+  height: 30px;
+  background:  hsl(var(--color-app));
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: hsl(var(--color-app-box));
+  user-select: none;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.titlebar-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 30px;
+}
+.titlebar-button:hover {
+  background: hsl(var(--color-app-hover));
+}
+.titlebar-button--close:hover {
+  background: red;
+}
 .progress-item.half {
   background: linear-gradient(90deg, #fff 50%, transparent 50%);
 }
-
 .progress-item.done {
   border: 2px solid #fff;
   background-color: #fff;
 }
-
 .backdrop-blur {
 	backdrop-filter: blur(18px);
 	-webkit-backdrop-filter: blur(18px);
 }
-
 .top-bar-blur {
 	@apply border-app-line/50;
 	backdrop-filter: saturate(120%) blur(18px);
 }
-
 [type='button'] {
 	-webkit-appearance: none;
 }
