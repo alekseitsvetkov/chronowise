@@ -11,6 +11,12 @@ use tauri::{
 #[cfg(target_os = "macos")]
 use cocoa::appkit::{NSWindow, NSWindowStyleMask};
 
+#[derive(Clone, serde::Serialize)]
+struct Payload {
+    args: Vec<String>,
+    cwd: String,
+}
+
 pub trait WindowExt {
     #[cfg(target_os = "macos")]
     fn set_transparent_titlebar(&self, transparent: bool);
@@ -62,6 +68,7 @@ fn create_system_tray() -> SystemTray {
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
+            app.set_activation_policy(tauri::ActivationPolicy::Accessory);
             let window = app.get_window("main").unwrap();
             #[cfg(target_os = "macos")]
             window.set_transparent_titlebar(true);
@@ -103,6 +110,12 @@ fn main() {
             },
             _ => {}
         })
+        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+            println!("{}, {argv:?}, {cwd}", app.package_info().name);
+
+            app.emit_all("single-instance", Payload { args: argv, cwd })
+                .unwrap();
+        }))
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|app, event| match event {

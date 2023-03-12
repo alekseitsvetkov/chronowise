@@ -12,7 +12,7 @@
 	},
 	"tauri": {
 		"allowlist": {
-			"all": false,
+			"all": true,
 			"shell": {
 				"all": false,
 				"open": true
@@ -47,14 +47,14 @@
 				"icons/icon.icns",
 				"icons/icon.ico"
 			],
-			"identifier": "com.base.dev",
+			"identifier": "com.chronosphere.desktop",
 			"longDescription": "",
 			"macOS": {
-				"entitlements": null,
-				"exceptionDomain": "",
 				"frameworks": [],
-				"providerShortName": null,
-				"signingIdentity": null
+				"minimumSystemVersion": "10.15",
+				"exceptionDomain": "",
+				"signingIdentity": null,
+				"entitlements": null
 			},
 			"resources": [],
 			"shortDescription": "",
@@ -80,7 +80,10 @@
 				"height": 270,
 				"transparent": true,
 				"decorations": false,
-				"hiddenTitle": true
+				"hiddenTitle": true,
+				"alwaysOnTop": false,
+				"fileDropEnabled": false,
+				"center": true
 			}
 		],
 		"macOSPrivateApi": true,
