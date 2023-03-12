@@ -74,11 +74,13 @@
 		"windows": [
 			{
 				"fullscreen": false,
-				"height": 270,
 				"resizable": false,
 				"title": "chronosphere",
 				"width": 300,
-				"transparent": true
+				"height": 270,
+				"transparent": true,
+				"decorations": false,
+				"hiddenTitle": true
 			}
 		],
 		"macOSPrivateApi": true,

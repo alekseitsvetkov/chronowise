@@ -3,102 +3,117 @@
     windows_subsystem = "windows"
 )]
 
+use tauri::{
+    CustomMenuItem, Manager, RunEvent, Runtime, SystemTray, SystemTrayEvent, SystemTrayMenu,
+    SystemTrayMenuItem, Window, WindowEvent,
+};
+
+#[cfg(target_os = "macos")]
 use cocoa::appkit::{NSWindow, NSWindowStyleMask};
-use tauri::{CustomMenuItem, SystemTray, SystemTrayMenu, SystemTrayMenuItem, SystemTrayEvent, Manager, Runtime, Window};
 
 pub trait WindowExt {
-  #[cfg(target_os = "macos")]
-  fn set_transparent_titlebar(&self, transparent: bool);
+    #[cfg(target_os = "macos")]
+    fn set_transparent_titlebar(&self, transparent: bool);
 }
 
 impl<R: Runtime> WindowExt for Window<R> {
-  #[cfg(target_os = "macos")]
-  fn set_transparent_titlebar(&self, transparent: bool) {
-    use cocoa::appkit::NSWindowTitleVisibility;
+    #[cfg(target_os = "macos")]
+    fn set_transparent_titlebar(&self, transparent: bool) {
+        use cocoa::appkit::NSWindowTitleVisibility;
 
-    unsafe {
-      let id = self.ns_window().unwrap() as cocoa::base::id;
+        unsafe {
+            let id = self.ns_window().unwrap() as cocoa::base::id;
 
-      let mut style_mask = id.styleMask();
-      style_mask.set(
-        NSWindowStyleMask::NSFullSizeContentViewWindowMask,
-        transparent,
-      );
-      id.setStyleMask_(style_mask);
+            let mut style_mask = id.styleMask();
+            style_mask.set(
+                NSWindowStyleMask::NSFullSizeContentViewWindowMask,
+                transparent,
+            );
+            id.setStyleMask_(style_mask);
 
-      id.setTitleVisibility_(if transparent {
-        NSWindowTitleVisibility::NSWindowTitleHidden
-      } else {
-        NSWindowTitleVisibility::NSWindowTitleVisible
-      });
-      id.setTitlebarAppearsTransparent_(if transparent {
-        cocoa::base::YES
-      } else {
-        cocoa::base::NO
-      });
+            id.setTitleVisibility_(if transparent {
+                NSWindowTitleVisibility::NSWindowTitleHidden
+            } else {
+                NSWindowTitleVisibility::NSWindowTitleVisible
+            });
+            id.setTitlebarAppearsTransparent_(if transparent {
+                cocoa::base::YES
+            } else {
+                cocoa::base::NO
+            });
+        }
     }
-  }
+}
+
+fn create_system_tray() -> SystemTray {
+    let quit = CustomMenuItem::new("Quit".to_string(), "Quit");
+    let show = CustomMenuItem::new("Show".to_string(), "Show");
+    let hide = CustomMenuItem::new("Hide".to_string(), "Hide");
+    let preferences = CustomMenuItem::new("Preferences".to_string(), "Preferences");
+    let tray_menu = SystemTrayMenu::new()
+        .add_item(show)
+        .add_item(hide)
+        .add_item(preferences)
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(quit);
+    SystemTray::new().with_menu(tray_menu)
 }
 
 fn main() {
-    let show = CustomMenuItem::new("show".to_string(), "Show");
-    let about = CustomMenuItem::new("about".to_string(), "About Chronosphere");
-    let settings = CustomMenuItem::new("settings".to_string(), "Settings");
-    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-    let tray_menu = SystemTrayMenu::new()
-    .add_item(show)
-    .add_item(about)
-    .add_item(settings)
-    .add_native_item(SystemTrayMenuItem::Separator)
-    .add_item(quit);
-
-    let tray = SystemTray::new().with_menu(tray_menu);
-
     tauri::Builder::default()
         .setup(|app| {
-          let main = app.get_window("main").unwrap();
-          main.set_transparent_titlebar(true);
+            let window = app.get_window("main").unwrap();
+            #[cfg(target_os = "macos")]
+            window.set_transparent_titlebar(true);
 
-          Ok(())
+            Ok(())
         })
-        .system_tray(tray)
+        .system_tray(create_system_tray())
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::LeftClick { .. } => {
-              let main = app.get_window("main").unwrap();
-              if main.is_visible().unwrap() {
-                main.hide().unwrap();
-              } else {
-                main.show().unwrap();
-                main.unminimize().unwrap();
-                main.set_focus().unwrap();
-              }
-            }
-            SystemTrayEvent::MenuItemClick { id, .. } => {
-              match id.as_str() {
-                "show" => {
-                  let main = app.get_window("main").unwrap();
-                  if main.is_visible().unwrap() {
-                    main.hide().unwrap();
-                  } else {
-                    main.show().unwrap();
-                    main.unminimize().unwrap();
-                    main.set_focus().unwrap();
-                  }
+                let window = app.get_window("main").unwrap();
+                let visible = window.is_visible().unwrap();
+                if visible {
+                    window.hide().unwrap();
+                } else {
+                    window.show().unwrap();
+                    window.set_focus().unwrap();
                 }
-                "quit" => {
-                  app.exit(0);
+            }
+            SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
+                "Hide" => {
+                    let window = app.get_window("main").unwrap();
+                    window.hide().unwrap();
+                }
+                "Show" => {
+                    let window = app.get_window("main").unwrap();
+                    window.show().unwrap();
+                    window.center().unwrap();
+                }
+                "Preferences" => {
+                    let window = app.get_window("main").unwrap();
+                    window.emit("PreferencesClicked", Some("Yes")).unwrap();
+                    window.show().unwrap();
+                    window.center().unwrap();
+                }
+                "Quit" => {
+                    std::process::exit(0);
                 }
                 _ => {}
-              }
-            }
+            },
             _ => {}
-          })
+        })
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
-        .run(|_app_handle, event| match event {
-            tauri::RunEvent::ExitRequested { api, .. } => {
-                api.prevent_exit();
-            }
+        .run(|app, event| match event {
+            RunEvent::WindowEvent { label, event, .. } => match event {
+                WindowEvent::CloseRequested { api, .. } => {
+                    let window = app.get_window(label.as_str()).unwrap();
+                    window.hide().unwrap();
+                    api.prevent_close();
+                }
+                _ => {}
+            },
             _ => {}
         });
 }

@@ -12,7 +12,7 @@ document
 // @ts-ignore
 document
   .getElementById('titlebar-close')
-  .addEventListener('click', () => appWindow.close())
+  .addEventListener('click', () => appWindow.hide())
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
