@@ -5,6 +5,7 @@ import {
   Cog,
   MoreVertical,
   MoreHorizontal,
+  BellRing,
   type Icon as LucideIcon,
 } from "lucide-react"
 
@@ -16,5 +17,6 @@ export const Icons = {
   reset: RefreshCcw,
   cog: Cog,
   moreVertical: MoreVertical,
-  moreHorizontal: MoreHorizontal
+  moreHorizontal: MoreHorizontal,
+  bellRing: BellRing
 }

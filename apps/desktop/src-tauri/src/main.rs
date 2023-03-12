@@ -3,6 +3,8 @@
     windows_subsystem = "windows"
 )]
 
+use std::io::BufReader;
+
 use tauri::{
     CustomMenuItem, Manager, RunEvent, Runtime, SystemTray, SystemTrayEvent, SystemTrayMenu,
     SystemTrayMenuItem, Window, WindowEvent,
@@ -15,6 +17,17 @@ use cocoa::appkit::{NSWindow, NSWindowStyleMask};
 struct Payload {
     args: Vec<String>,
     cwd: String,
+}
+
+#[tauri::command]
+fn play_notification_sound() {
+    let (_stream, handle) = rodio::OutputStream::try_default().unwrap();
+    let sink = rodio::Sink::try_new(&handle).unwrap();
+
+    let file = std::fs::File::open("audio/notification.mp3").unwrap();
+    sink.append(rodio::Decoder::new(BufReader::new(file)).unwrap());
+
+    sink.sleep_until_end();
 }
 
 pub trait WindowExt {
@@ -68,6 +81,7 @@ fn create_system_tray() -> SystemTray {
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
+            #[cfg(target_os = "macos")]
             app.set_activation_policy(tauri::ActivationPolicy::Accessory);
             let window = app.get_window("main").unwrap();
             #[cfg(target_os = "macos")]
@@ -110,6 +124,7 @@ fn main() {
             },
             _ => {}
         })
+        .invoke_handler(tauri::generate_handler![play_notification_sound])
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             println!("{}, {argv:?}, {cwd}", app.package_info().name);
 
