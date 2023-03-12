@@ -33,9 +33,9 @@ export const App: FC = () => {
         <div onClick={reset}>
           <Icons.reset size={20} color="#FFFFFF" />
         </div>
-        <div onClick={() => { }}>
+        {/* <div onClick={() => { }}>
           <Icons.moreHorizontal size={20} color="#FFFFFF" />
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-row justify-between items-end pt-2">
         <div>
