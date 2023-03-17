@@ -21,7 +21,7 @@ struct Payload {
 }
 
 #[tauri::command]
-fn play_notification_sound(app_handle: tauri::AppHandle) {
+async fn play_notification_sound(app_handle: tauri::AppHandle) {
     let resource_path = app_handle
         .path_resolver()
         .resolve_resource("../assets/audio/notification.mp3")
