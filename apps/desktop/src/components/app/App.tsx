@@ -4,7 +4,6 @@ import { useChronosphere } from "~/hooks";
 import { secondsToTime } from "~/utils";
 import { Icons } from "@chronosphere/ui";
 import { Line } from "rc-progress";
-import { invoke } from '@tauri-apps/api/tauri';
 
 const FOCUS_TIME = 25 * 60;
 const SHORT_BREAK_TIME = 5 * 60;
@@ -20,7 +19,7 @@ export const App: FC = () => {
     percentLeft,
     start,
     pause,
-    reset
+    reset,
   } = useChronosphere({
     focusTime: FOCUS_TIME,
     shortBreakTime: SHORT_BREAK_TIME,
@@ -28,19 +27,15 @@ export const App: FC = () => {
     cycles: CYCLES,
   });
 
-  const playNotificationSound = async () => {
-    await invoke("play_notification_sound");
-  }
-
   return (
     <div className="bg-app h-screen flex flex-col p-4 justify-between pt-12">
       <div className="flex justify-between">
         <div className="hover:cursor-pointer" onClick={reset}>
           <Icons.reset size={20} color="#FFFFFF" />
         </div>
-        <div className="hover:cursor-pointer" onClick={playNotificationSound}>
+        {/* <div className="hover:cursor-pointer">
           <Icons.bellRing size={20} color="#FFFFFF" />
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-row justify-between items-end pt-2">
         <div>

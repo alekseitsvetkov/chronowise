@@ -1,7 +1,7 @@
-import {sendNotification} from '@tauri-apps/api/notification'
-import {useEffect, useRef, useState} from 'react'
+import { sendNotification } from '@tauri-apps/api/notification'
+import { useEffect, useRef, useState } from 'react'
+import { invoke } from '@tauri-apps/api/tauri';
 import { BREAK_TIME_NOTIFICATION, FOCUS_TIME_NOTIFICATION, NOTIFICATION_TITLE } from '../constants'
-
 interface IUsePomodoroProps {
   focusTime: number
   shortBreakTime: number
@@ -25,6 +25,10 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const playNotificationSound = async () => {
+    await invoke("play_notification_sound");
+  }
+
   const startTimer = () => {
     setIsPaused(false);
     const id = setInterval(() => {
@@ -45,7 +49,7 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
               title: NOTIFICATION_TITLE,
               body: FOCUS_TIME_NOTIFICATION,
             });
-            
+            playNotificationSound();
           } else {
             setIsBreak(true);
             setTimeLeft(cycle !== 4 ? shortBreakTime : longBreakTime);
@@ -54,6 +58,7 @@ export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycle
               title: NOTIFICATION_TITLE,
               body: BREAK_TIME_NOTIFICATION,
             });
+            playNotificationSound();
           }
         }
         return prevTime - 1;
