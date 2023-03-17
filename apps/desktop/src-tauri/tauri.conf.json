@@ -30,6 +30,17 @@
 				"unmaximize": true,
 				"unminimize": true,
 				"startDragging": true
+			},
+			"path": {
+				"all": true
+			},
+			"fs": {
+				"all": true,
+				"scope": [
+					"$APP/*",
+					"$DESKTOP/*",
+					"$RESOURCE/*"
+				]
 			}
 		},
 		"bundle": {
@@ -56,7 +67,9 @@
 				"signingIdentity": null,
 				"entitlements": null
 			},
-			"resources": [],
+			"resources": [
+				"../assets/*"
+			],
 			"shortDescription": "",
 			"targets": "all",
 			"windows": {

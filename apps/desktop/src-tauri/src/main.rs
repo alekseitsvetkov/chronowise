@@ -3,15 +3,16 @@
     windows_subsystem = "windows"
 )]
 
-use std::io::BufReader;
+#[cfg(target_os = "macos")]
+use cocoa::appkit::{NSWindow, NSWindowStyleMask};
 
+use std::env;
+use std::io::BufReader;
 use tauri::{
     CustomMenuItem, Manager, RunEvent, Runtime, SystemTray, SystemTrayEvent, SystemTrayMenu,
     SystemTrayMenuItem, Window, WindowEvent,
 };
-
-#[cfg(target_os = "macos")]
-use cocoa::appkit::{NSWindow, NSWindowStyleMask};
+use tauri_plugin_log::LogTarget;
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -20,13 +21,17 @@ struct Payload {
 }
 
 #[tauri::command]
-fn play_notification_sound() {
+fn play_notification_sound(app_handle: tauri::AppHandle) {
+    let resource_path = app_handle
+        .path_resolver()
+        .resolve_resource("../assets/audio/notification.mp3")
+        .expect("failed to resolve resource dir");
+
     let (_stream, handle) = rodio::OutputStream::try_default().unwrap();
     let sink = rodio::Sink::try_new(&handle).unwrap();
 
-    let file = std::fs::File::open("audio/notification.mp3").unwrap();
+    let file = std::fs::File::open(&resource_path).unwrap();
     sink.append(rodio::Decoder::new(BufReader::new(file)).unwrap());
-
     sink.sleep_until_end();
 }
 
@@ -86,7 +91,6 @@ fn main() {
             let window = app.get_window("main").unwrap();
             #[cfg(target_os = "macos")]
             window.set_transparent_titlebar(true);
-
             Ok(())
         })
         .system_tray(create_system_tray())
@@ -131,6 +135,11 @@ fn main() {
             app.emit_all("single-instance", Payload { args: argv, cwd })
                 .unwrap();
         }))
+        .plugin(
+            tauri_plugin_log::Builder::default()
+                .targets([LogTarget::LogDir, LogTarget::Stdout, LogTarget::Webview])
+                .build(),
+        )
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|app, event| match event {
