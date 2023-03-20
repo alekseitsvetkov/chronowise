@@ -4,10 +4,7 @@
 )]
 
 #[cfg(target_os = "macos")]
-use cocoa::appkit::{NSWindow, NSWindowButton, NSWindowStyleMask, NSWindowTitleVisibility};
-
-#[cfg(target_os = "macos")]
-use objc::runtime::YES;
+use cocoa::appkit::{NSWindow, NSWindowStyleMask};
 
 use std::env;
 use std::io::BufReader;
@@ -38,45 +35,32 @@ async fn play_notification_sound(app_handle: tauri::AppHandle) {
     sink.sleep_until_end();
 }
 
-#[cfg(target_os = "macos")]
-#[macro_use]
-extern crate objc;
-
 pub trait WindowExt {
     #[cfg(target_os = "macos")]
-    fn set_transparent_titlebar(&self, title_transparent: bool, remove_toolbar: bool);
+    fn set_transparent_titlebar(&self, transparent: bool);
 }
 
 impl<R: Runtime> WindowExt for Window<R> {
     #[cfg(target_os = "macos")]
-    fn set_transparent_titlebar(&self, title_transparent: bool, remove_tool_bar: bool) {
+    fn set_transparent_titlebar(&self, transparent: bool) {
+        use cocoa::appkit::NSWindowTitleVisibility;
+
         unsafe {
             let id = self.ns_window().unwrap() as cocoa::base::id;
-            NSWindow::setTitlebarAppearsTransparent_(id, cocoa::base::YES);
+
             let mut style_mask = id.styleMask();
             style_mask.set(
                 NSWindowStyleMask::NSFullSizeContentViewWindowMask,
-                title_transparent,
+                transparent,
             );
-
             id.setStyleMask_(style_mask);
 
-            if remove_tool_bar {
-                let close_button = id.standardWindowButton_(NSWindowButton::NSWindowCloseButton);
-                let _: () = msg_send![close_button, setHidden: YES];
-                let min_button = id.standardWindowButton_(NSWindowButton::NSWindowMiniaturizeButton);
-                let _: () = msg_send![min_button, setHidden: YES];
-                let zoom_button = id.standardWindowButton_(NSWindowButton::NSWindowZoomButton);
-                let _: () = msg_send![zoom_button, setHidden: YES];
-            }
-
-            id.setTitleVisibility_(if title_transparent {
+            id.setTitleVisibility_(if transparent {
                 NSWindowTitleVisibility::NSWindowTitleHidden
             } else {
                 NSWindowTitleVisibility::NSWindowTitleVisible
             });
-
-            id.setTitlebarAppearsTransparent_(if title_transparent {
+            id.setTitlebarAppearsTransparent_(if transparent {
                 cocoa::base::YES
             } else {
                 cocoa::base::NO
@@ -106,9 +90,8 @@ fn main() {
             app.set_activation_policy(tauri::ActivationPolicy::Accessory);
 
             let win = app.get_window("main").unwrap();
-            #[cfg(target_os = "macos")]
-            win.set_transparent_titlebar(true, false);
-            
+            win.set_transparent_titlebar(true);
+
             Ok(())
         })
         .system_tray(create_system_tray())
@@ -133,12 +116,6 @@ fn main() {
                     window.show().unwrap();
                     window.center().unwrap();
                 }
-                // "Preferences" => {
-                //     let window = app.get_window("main").unwrap();
-                //     window.emit("PreferencesClicked", Some("Yes")).unwrap();
-                //     window.show().unwrap();
-                //     window.center().unwrap();
-                // }
                 "Quit" => {
                     std::process::exit(0);
                 }
