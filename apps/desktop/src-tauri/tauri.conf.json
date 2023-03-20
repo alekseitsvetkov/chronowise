@@ -26,7 +26,7 @@
 				"hide": true,
 				"show": true,
 				"maximize": false,
-				"minimize": true,
+				"minimize": false,
 				"unmaximize": true,
 				"unminimize": true,
 				"startDragging": true
@@ -88,7 +88,7 @@
 			{
 				"fullscreen": false,
 				"resizable": false,
-				"title": "chronosphere",
+				"title": "",
 				"width": 300,
 				"height": 270,
 				"transparent": true,
@@ -96,7 +96,8 @@
 				"hiddenTitle": true,
 				"alwaysOnTop": false,
 				"fileDropEnabled": false,
-				"center": true
+				"center": true,
+				"titleBarStyle": "Overlay"
 			}
 		],
 		"macOSPrivateApi": true,

@@ -1,6 +1,6 @@
 [package]
 name = "chronosphere"
-version = "0.0.0"
+version = "0.0.1"
 description = "A Tauri App"
 authors = ["you"]
 license = ""
@@ -21,8 +21,9 @@ tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", br
 log = "0.4.17"
 rodio = "0.17.1"
 
-[target."cfg(target_os = \"macos\")".dependencies]
+[target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.24"
+objc = "0.2.7"
 
 [features]
 # by default Tauri runs in production mode
