@@ -92,7 +92,7 @@
 				"width": 300,
 				"height": 270,
 				"transparent": true,
-				"decorations": false,
+				"decorations": true,
 				"hiddenTitle": true,
 				"alwaysOnTop": false,
 				"fileDropEnabled": false,
