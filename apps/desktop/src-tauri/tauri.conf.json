@@ -23,12 +23,7 @@
 			"window": {
 				"all": false,
 				"close": true,
-				"hide": true,
 				"show": true,
-				"maximize": false,
-				"minimize": false,
-				"unmaximize": true,
-				"unminimize": true,
 				"startDragging": true
 			},
 			"path": {
@@ -88,19 +83,16 @@
 			{
 				"fullscreen": false,
 				"resizable": false,
-				"title": "",
+				"title": "chronosphere",
 				"width": 300,
 				"height": 270,
-				"transparent": true,
-				"decorations": true,
-				"hiddenTitle": true,
-				"alwaysOnTop": false,
+				"decorations": false,
+				"skipTaskbar": true,
 				"fileDropEnabled": false,
-				"center": true,
-				"titleBarStyle": "Overlay"
+				"titleBarStyle": "Overlay",
+				"hiddenTitle": true
 			}
 		],
-		"macOSPrivateApi": true,
 		"systemTray": {
 			"iconPath": "icons/icon.png",
 			"iconAsTemplate": true

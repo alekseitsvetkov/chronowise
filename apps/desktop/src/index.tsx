@@ -8,6 +8,8 @@ import '@fontsource/inter';
 document
   ?.getElementById('titlebar-close')
   ?.addEventListener('click', () => appWindow.hide())
+  
+document.addEventListener('contextmenu', event => event.preventDefault());
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
