@@ -5,15 +5,9 @@ import { appWindow } from '@tauri-apps/api/window'
 import '@chronosphere/ui/style/style.scss';
 import '@fontsource/inter';
 
-// @ts-ignore
 document
-  .getElementById('titlebar-minimize')
-  .addEventListener('click', () => appWindow.minimize())
-// @ts-ignore
-document
-  .getElementById('titlebar-close')
-  .addEventListener('click', () => appWindow.hide())
-
+  ?.getElementById('titlebar-close')
+  ?.addEventListener('click', () => appWindow.hide())
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

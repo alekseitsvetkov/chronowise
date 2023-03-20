@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"main": "index.ts",
 	"scripts": {
-		"dev": "RUST_BACKTRACE=1 vite",
+		"dev": "vite",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"tauri": "tauri"
