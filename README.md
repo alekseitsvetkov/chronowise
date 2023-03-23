@@ -21,6 +21,8 @@
   </p>
 </p>
 
+Chronowise is an open source cross-platform focus timer.
+
 ## Monorepo structure:
 
 ### Apps:
