@@ -3,7 +3,7 @@
     
   </a>
   <p align="center">
-   <img width="150" height="150" src="" alt="Logo">
+   <img width="150" height="150" src="https://github.com/alekseytsvetkov/chronowise/blob/main/packages/assets/images/AppLogo.png" alt="Logo">
   </p>
   <h1 align="center"><b>Chronowise</b></h1>
   <p align="center">
