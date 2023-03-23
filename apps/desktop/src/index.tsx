@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './components';
 import { appWindow } from '@tauri-apps/api/window'
-import '@chronosphere/ui/style/style.scss';
+import '@chronowise/ui/style/style.scss';
 import '@fontsource/inter';
 
 document

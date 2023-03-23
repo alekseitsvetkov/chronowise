@@ -1,12 +1,12 @@
 {
-	"name": "@chronosphere/root",
+	"name": "@chronowise/root",
 	"version": "0.0.1",
 	"main": "index.ts",
 	"private": true,
 	"scripts": {
 		"build": "turbo run build",
 		"format": "prettier --write .",
-		"desktop": "pnpm --filter @chronosphere/desktop --",
+		"desktop": "pnpm --filter @chronowise/desktop --",
 		"typecheck": "turbo run typecheck",
 		"lint": "turbo run lint",
 		"lint:fix": "turbo run lint -- --fix",

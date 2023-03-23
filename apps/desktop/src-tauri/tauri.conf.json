@@ -7,7 +7,7 @@
 		"withGlobalTauri": false
 	},
 	"package": {
-		"productName": "chronosphere",
+		"productName": "chronowise",
 		"version": "0.0.1"
 	},
 	"tauri": {
@@ -53,7 +53,7 @@
 				"icons/icon.icns",
 				"icons/icon.ico"
 			],
-			"identifier": "com.chronosphere.desktop",
+			"identifier": "com.chronowise.desktop",
 			"longDescription": "",
 			"macOS": {
 				"frameworks": [],
@@ -83,7 +83,7 @@
 			{
 				"fullscreen": false,
 				"resizable": false,
-				"title": "chronosphere",
+				"title": "chronowise",
 				"width": 300,
 				"height": 270,
 				"decorations": false,

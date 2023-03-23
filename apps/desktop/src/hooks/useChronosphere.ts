@@ -15,7 +15,7 @@ export enum TimerType {
   LongBreak,
 }
 
-export const useChronosphere = ({focusTime, shortBreakTime, longBreakTime, cycles}: IUsePomodoroProps) => {
+export const useChronowise = ({focusTime, shortBreakTime, longBreakTime, cycles}: IUsePomodoroProps) => {
   const [cycle, setCycle] = useState(1);
   const [timeLeft, setTimeLeft] = useState(focusTime);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);

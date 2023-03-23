@@ -1,1 +1,1 @@
-module.exports = require('@chronosphere/ui/tailwind')('desktop');
+module.exports = require('@chronowise/ui/tailwind')('desktop');

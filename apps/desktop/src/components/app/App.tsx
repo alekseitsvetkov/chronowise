@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { FC } from "react";
-import { useChronosphere } from "~/hooks";
+import { useChronowise } from "~/hooks";
 import { secondsToTime } from "~/utils";
-import { Icons } from "@chronosphere/ui";
+import { Icons } from "@chronowise/ui";
 import { Line } from "rc-progress";
 
 const FOCUS_TIME = 25 * 60;
@@ -20,7 +20,7 @@ export const App: FC = () => {
     start,
     pause,
     reset,
-  } = useChronosphere({
+  } = useChronowise({
     focusTime: FOCUS_TIME,
     shortBreakTime: SHORT_BREAK_TIME,
     longBreakTime: LONG_BREAK_TIME,

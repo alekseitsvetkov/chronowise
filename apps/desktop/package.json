@@ -1,5 +1,5 @@
 {
-	"name": "@chronosphere/desktop",
+	"name": "@chronowise/desktop",
 	"private": true,
 	"version": "0.0.1",
 	"main": "index.ts",
@@ -10,7 +10,7 @@
 		"tauri": "tauri"
 	},
 	"dependencies": {
-		"@chronosphere/ui": "workspace:*",
+		"@chronowise/ui": "workspace:*",
 		"@tauri-apps/api": "^1.2.0",
 		"clsx": "^1.2.1",
 		"dayjs": "^1.11.7",
@@ -19,7 +19,7 @@
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"@chronosphere/config": "workspace:*",
+		"@chronowise/config": "workspace:*",
 		"@tauri-apps/cli": "^1.2.2",
 		"@types/babel-core": "^6.25.7",
 		"@types/node": "^18.7.10",

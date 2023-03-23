@@ -1,1 +1,1 @@
-export * from './useChronosphere';
+export * from './useChronowise';

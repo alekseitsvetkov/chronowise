@@ -1,1 +1,1 @@
-module.exports = require('@chronosphere/ui/postcss');
+module.exports = require('@chronowise/ui/postcss');

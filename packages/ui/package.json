@@ -1,5 +1,5 @@
 {
-  "name": "@chronosphere/ui",
+  "name": "@chronowise/ui",
   "version": "1.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -18,7 +18,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@chronosphere/assets": "workspace:*",
+    "@chronowise/assets": "workspace:*",
     "@fontsource/inter": "^4.5.15",
     "@headlessui/react": "^1.7.3",
     "@headlessui/tailwindcss": "^0.1.1",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "@chronosphere/config": "workspace:*",
+    "@chronowise/config": "workspace:*",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",

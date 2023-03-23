@@ -29,8 +29,8 @@ importers:
 
   apps/desktop:
     specifiers:
-      '@chronosphere/config': workspace:*
-      '@chronosphere/ui': workspace:*
+      '@chronowise/config': workspace:*
+      '@chronowise/ui': workspace:*
       '@tauri-apps/api': ^1.2.0
       '@tauri-apps/cli': ^1.2.2
       '@types/babel-core': ^6.25.7
@@ -49,7 +49,7 @@ importers:
       vite: ^4.0.0
       vite-tsconfig-paths: ^4.0.5
     dependencies:
-      '@chronosphere/ui': link:../../packages/ui
+      '@chronowise/ui': link:../../packages/ui
       '@tauri-apps/api': 1.2.0
       clsx: 1.2.1
       dayjs: 1.11.7
@@ -57,7 +57,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
-      '@chronosphere/config': link:../../packages/config
+      '@chronowise/config': link:../../packages/config
       '@tauri-apps/cli': 1.2.3
       '@types/babel-core': 6.25.7
       '@types/node': 18.14.4
@@ -96,8 +96,8 @@ importers:
   packages/ui:
     specifiers:
       '@babel/core': ^7.19.3
-      '@chronosphere/assets': workspace:*
-      '@chronosphere/config': workspace:*
+      '@chronowise/assets': workspace:*
+      '@chronowise/config': workspace:*
       '@fontsource/inter': ^4.5.15
       '@headlessui/react': ^1.7.3
       '@headlessui/tailwindcss': ^0.1.1
@@ -147,7 +147,7 @@ importers:
       tailwindcss-radix: ^2.6.0
       typescript: ^4.8.4
     dependencies:
-      '@chronosphere/assets': link:../assets
+      '@chronowise/assets': link:../assets
       '@fontsource/inter': 4.5.15
       '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
       '@headlessui/tailwindcss': 0.1.2_tailwindcss@3.2.7
@@ -173,7 +173,7 @@ importers:
       tailwindcss-radix: 2.8.0
     devDependencies:
       '@babel/core': 7.21.0
-      '@chronosphere/config': link:../config
+      '@chronowise/config': link:../config
       '@storybook/addon-actions': 6.5.16_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-essentials': 6.5.16_q7i7ist2bdkhouqqbb3ievfkxy
       '@storybook/addon-interactions': 6.5.16_fleixqh4h74dmdivs7fx6vtiqe

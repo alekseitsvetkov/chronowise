@@ -27,10 +27,10 @@ Function CheckCommand {
 
 }
 
-Write-Host "Chronosphere Development Environment Setup" -ForegroundColor Magenta
+Write-Host "Chronowise Development Environment Setup" -ForegroundColor Magenta
 Write-Host @"
 
-To set up your machine for Chronosphere development, this script will do the following:
+To set up your machine for Chronowise development, this script will do the following:
 
 1) Check for Rust and Cargo
 
@@ -53,7 +53,7 @@ if ($cargoCheck -eq $false) {
    Write-Host @"
 Cargo is not installed.
 
-To use Chronosphere on Windows, Cargo needs to be installed.
+To use Chronowise on Windows, Cargo needs to be installed.
 The Visual Studio C++ Build tools are also required.
 Instructions can be found here:
 
@@ -181,4 +181,4 @@ New-Item -Path $currentLocation\target\debug -ItemType Directory -ErrorAction Si
 Get-ChildItem "$HOME\$foldername\bin" -recurse -filter *.dll | Copy-Item -Destination "$currentLocation\target\debug"
 
 Write-Host
-Write-Host "Your machine has been setup for Chronosphere development!"
+Write-Host "Your machine has been setup for Chronowise development!"

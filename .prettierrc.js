@@ -12,8 +12,8 @@ module.exports = {
 	importOrder: [
 		// external packages
 		'^([A-Za-z]|@[^s/])',
-    // app packages
-		'^@chronosphere/(ui)(/.*)?$',
+		// app packages
+		'^@chronowise/(ui)(/.*)?$',
 		// this package
 		'^~/',
 		// relative

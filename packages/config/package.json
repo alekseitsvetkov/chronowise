@@ -1,5 +1,5 @@
 {
-  "name": "@chronosphere/config",
+  "name": "@chronowise/config",
   "version": "1.0.0",
   "exports": {
     "./*": "./*",

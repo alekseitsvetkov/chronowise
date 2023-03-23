@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  CHRONOSPHERE_CUSTOM_APT_FLAGS: --no-install-recommends
+  CHRONOWISE_CUSTOM_APT_FLAGS: --no-install-recommends
 
 jobs:
   typescript:
