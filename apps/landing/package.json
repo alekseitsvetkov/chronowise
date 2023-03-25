@@ -1,0 +1,41 @@
+{
+  "name": "@chronowise/landing",
+  "scripts": {
+    "dev": "pnpm run server",
+    "prod": "pnpm run build && pnpm run server:prod",
+    "vercel-build": "./vercel/deploy.sh",
+    "build": "vite build",
+    "server": "ts-node ./server",
+    "server:prod": "cross-env NODE_ENV=production ts-node ./server",
+    "lint": "eslint src",
+    "typecheck": "tsc -b"
+  },
+  "dependencies": {
+    "@chronowise/assets": "workspace:*",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "sirv": "^2.0.2",
+    "ts-node": "^10.9.1",
+    "vite": "^4.2.0",
+    "vite-plugin-ssr": "^0.4.103",
+    "vite-plugin-svgr": "^2.4.0"
+  },
+  "devDependencies": {
+    "@chronowise/config": "workspace:*",
+    "@chronowise/ui": "workspace:*",
+    "@types/compression": "^1.7.2",
+    "@types/express": "^4.17.17",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-helmet": "^6.1.6",
+    "@vitejs/plugin-react": "^3.1.0",
+    "postcss": "^8.4.17",
+    "rollup-plugin-visualizer": "^5.9.0",
+    "sass": "^1.55.0",
+    "typescript": "^4.9.3"
+  }
+}
