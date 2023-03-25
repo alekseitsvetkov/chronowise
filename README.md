@@ -9,7 +9,7 @@
   <p align="center">
   A focus timer from the future.
     <br />
-    <a href="https://chronowise.io"><strong>chronowise.io »</strong></a>
+    <a href="https://chronowise.vercel.app"><strong>chronowise.io »</strong></a>
     <br />
     <br />
     macOS
