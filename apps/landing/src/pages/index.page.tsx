@@ -20,10 +20,10 @@ function Page() {
 				/>
 				<meta name="author" content="Chronowise Technology Inc." />
 			</Helmet>
-			<div className="mt-22 lg:mt-28" id="content" aria-hidden="true" />
-			<div className="mt-24 lg:mt-5" />
+			{/* <div className="mt-22 lg:mt-28" id="content" aria-hidden="true" /> */}
+			{/* <div className="mt-24 lg:mt-5" /> */}
 
-			<h1 className="fade-in-heading z-30 px-2 text-center text-4xl font-black leading-tight text-black dark:text-white md:text-4xl">
+			<h1 className="fade-in-heading z-30 px-2 text-center text-4xl font-black leading-tight text-black dark:text-white">
 				Chronowise is a better way<br />to improve your workflow
 			</h1>
 			<p className="mt-3 text-center text-lg">

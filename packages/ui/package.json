@@ -41,6 +41,7 @@
     "react-loading-icons": "^1.1.0",
     "react-router-dom": "6.4.2",
     "react-spring": "^9.5.5",
+    "tailwind-merge": "^1.10.0",
     "tailwindcss-radix": "^2.6.0"
   },
   "devDependencies": {
