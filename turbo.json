@@ -4,7 +4,8 @@
 		"build": {
 			"dependsOn": [
 				"^build",
-				"$NODE_ENV"
+				"$NODE_ENV",
+				"$PORT"
 			],
 			"outputs": [
 				"dist/**"

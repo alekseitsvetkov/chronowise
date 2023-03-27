@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { PageContextBuiltIn } from 'vite-plugin-ssr';
+import type { PageContextBuiltIn } from 'vite-plugin-ssr';
 import '@chronowise/ui/style';
 import { PageContextProvider } from './renderer/usePageContext';
 import './style.scss';

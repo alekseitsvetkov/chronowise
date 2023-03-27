@@ -1,6 +1,6 @@
 import ReactDOMServer from 'react-dom/server';
 import { Helmet } from 'react-helmet';
-import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr';
+import { dangerouslySkipEscape, escapeInject } from 'vite-plugin-ssr/server';
 import type { PageContextBuiltIn } from 'vite-plugin-ssr';
 import App from '../App';
 import type { PageContext } from './types';
@@ -24,7 +24,7 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
 
 	const documentHtml = escapeInject`
 		<!DOCTYPE html>
-	    <html lang="en" class="dark" ${dangerouslySkipEscape(helmet.htmlAttributes.toString())}>
+	    <html lang="en" ${dangerouslySkipEscape(helmet.htmlAttributes.toString())}>
 	    <head>
 				<meta charset="UTF-8" />
 				<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
@@ -41,7 +41,7 @@ async function render(pageContext: PageContextBuiltIn & PageContext) {
 			<script
 				src="/stats/js/script.js"
 				data-api="/stats/api/event"
-				data-domain="chronowise.com"
+				data-domain="chronowise.io"
 			></script>
 	      </body>
 	    </html>

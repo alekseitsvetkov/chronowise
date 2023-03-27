@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { getWindow } from '../utils';
+// import { getWindow } from '../utils';
 
 export { Page };
 
@@ -14,12 +14,13 @@ function Page({ is404 }: { is404: boolean }) {
 					<div className="h-32" />
 					<p>Thats a 404.</p>
 					<div className="flex flex-wrap justify-center">
-						<a
+						{/* <a
+						
 							href={getWindow()?.document.referrer || 'javascript:history.back()'}
 							className="mt-2 mr-3 cursor-pointer"
 						>
 							← Back
-						</a>
+						</a> */}
 						<a href="/" className="mt-2 cursor-pointer !text-white">
 							Discover Chronowise →
 						</a>
