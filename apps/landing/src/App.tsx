@@ -14,7 +14,7 @@ export default function App({
 		<React.StrictMode>
 			<PageContextProvider pageContext={pageContext}>
 				<>
-					<div className="dark z-10 m-auto max-w-[100rem] dark:bg-black dark:text-white">
+					<div className="z-10 m-auto max-w-[100rem] bg-white text-black dark:bg-black dark:text-white">
 						{children}
 					</div>
 				</>

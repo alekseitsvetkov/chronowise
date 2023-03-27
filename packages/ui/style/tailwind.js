@@ -13,7 +13,7 @@ module.exports = function (app, options) {
 			'../../interface/**/*.{ts,tsx,html}',
 			app ? `../../apps/${app}/src/**/*.{ts,tsx,html}` : `./src/**/*.{ts,tsx,html}`
 		],
-		darkMode: 'media',
+		darkMode: 'class',
 		mode: 'jit',
 		theme: {
 			fontFamily: {
