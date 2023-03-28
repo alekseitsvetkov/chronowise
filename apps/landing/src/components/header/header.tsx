@@ -10,7 +10,7 @@ export function Header() {
         {/* <MobileNav /> */}
         <div className="flex flex-1 items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
           <nav className="flex items-center space-x-1">
-            <ModeToggle />
+            {/* <ModeToggle /> */}
             <a
               href={links.github}
               target="_blank"

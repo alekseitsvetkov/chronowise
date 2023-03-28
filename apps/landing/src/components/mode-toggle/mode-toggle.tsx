@@ -1,10 +1,10 @@
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
   Button,
-  Icons
+  Icons,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem
 } from "@chronowise/ui"
 
 import { useTheme } from "../theme-provider"
