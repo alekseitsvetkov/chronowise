@@ -1,7 +1,7 @@
 {
   "build": {
-    "beforeDevCommand": "pnpm dev",
-    "beforeBuildCommand": "pnpm build",
+    "beforeBuildCommand": "pnpm next-build",
+    "beforeDevCommand": "pnpm next-start",
     "devPath": "http://localhost:8001",
     "distDir": "../out",
     "withGlobalTauri": false
