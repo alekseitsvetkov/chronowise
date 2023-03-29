@@ -1,13 +1,44 @@
+
 {
-	"extends": "../../packages/config/base.tsconfig.json",
-	"compilerOptions": {
-		"rootDir": "src",
-		"declarationDir": "dist",
-		"types": ["node"],
-		"paths": {
-			"~/*": ["./src/*"]
-		}
-	},
-	"include": ["src"],
-	"references": []
+  "extends": "../../packages/config/app.tsconfig.json",
+  "references": [
+    {
+      "path": "../../packages/ui"
+    }
+  ],
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".contentlayer/generated"
+  ],
+  "exclude": ["node_modules"]
 }

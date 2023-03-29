@@ -26,3 +26,4 @@ dist-ssr
 .env
 
 apps/*/stats.html
+apps/desktop-old

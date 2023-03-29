@@ -2,8 +2,7 @@
   "name": "@chronowise/config",
   "version": "1.0.0",
   "exports": {
-    "./*": "./*",
-    "./vite": "./vite/index.js"
+    "./*": "./*"
   },
   "files": [
     "eslint-react.js"

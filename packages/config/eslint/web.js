@@ -1,6 +1,19 @@
 module.exports = {
+	compilerOptions: {
+		plugins: [
+      {
+        "name": "next"
+      }
+    ]
+	},
+	include: [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".contentlayer/generated"
+  ],
 	extends: [require.resolve('./base.js')],
-	ignorePatterns: ['public', 'vite.config.ts'],
 	env: {
 		browser: true,
 		node: true
