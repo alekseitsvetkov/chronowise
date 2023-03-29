@@ -11,6 +11,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chronowise/ui": "workspace:*",
+    "rc-progress": "^3.4.1",
+    "clsx": "^1.2.1",
+    "dayjs": "^1.11.7",
     "@types/node": "^18.7.10",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
@@ -22,6 +26,10 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.2.2"
+    "@tauri-apps/cli": "^1.2.2",
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.3.0",
+    "sass": "^1.55.0"
   }
 }

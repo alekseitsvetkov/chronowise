@@ -1,6 +1,5 @@
 import { Header, ThemeProvider } from '@/components'
 import '@chronowise/ui/style';
-import { cn } from '@/../../packages/ui/src';
 
 export const metadata = {
   title: 'Chronowise — A focus timer from the future.',

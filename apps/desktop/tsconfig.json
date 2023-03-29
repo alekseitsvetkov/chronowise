@@ -1,4 +1,3 @@
-
 {
   "extends": "../../packages/config/app.tsconfig.json",
   "references": [
