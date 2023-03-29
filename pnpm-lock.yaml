@@ -9,7 +9,7 @@ importers:
     devDependencies:
       '@babel/plugin-syntax-import-assertions':
         specifier: ^7.20.0
-        version: 7.20.0(@babel/core@7.19.3)
+        version: 7.20.0(@babel/core@7.21.3)
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^3.4.0
         version: 3.4.0(prettier@2.8.3)
@@ -40,6 +40,9 @@ importers:
       '@chronowise/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@tauri-apps/api':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@types/node':
         specifier: ^18.7.10
         version: 18.7.10
@@ -63,7 +66,7 @@ importers:
         version: 13.2.4(eslint@8.33.0)(typescript@5.0.2)
       next:
         specifier: 13.2.4
-        version: 13.2.4(@babel/core@7.19.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0)
+        version: 13.2.4(@babel/core@7.21.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0)
       rc-progress:
         specifier: ^3.4.1
         version: 3.4.1(react-dom@18.2.0)(react@18.2.0)
@@ -121,7 +124,7 @@ importers:
         version: 13.2.4(eslint@8.33.0)(typescript@5.0.2)
       next:
         specifier: ^13.2.4
-        version: 13.2.4(@babel/core@7.19.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0)
+        version: 13.2.4(@babel/core@7.21.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0)
       next-themes:
         specifier: ^0.2.1
         version: 0.2.1(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)
@@ -416,7 +419,6 @@ packages:
       semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@babel/generator@7.17.7:
     resolution: {integrity: sha512-oLcVCTeIFadUoArDTwpluncplrYBmTCCZZgXCbgNGvOBBiSDDK3eWO4b/+eOTli5tKv1lg+a5/NAXg+nTcei1w==}
@@ -488,7 +490,6 @@ packages:
       browserslist: 4.21.5
       lru-cache: 5.1.1
       semver: 6.3.0
-    dev: false
 
   /@babel/helper-create-class-features-plugin@7.21.0(@babel/core@7.19.3):
     resolution: {integrity: sha512-Q8wNiMIdwsv5la5SPxNYzzkPnjgC0Sy0i7jLkVOCdllu/xcVNkr3TeZzbHBJrj+XXRqzX5uCyCoV9eu6xUG7KQ==}
@@ -1214,6 +1215,16 @@ packages:
     dependencies:
       '@babel/core': 7.19.3
       '@babel/helper-plugin-utils': 7.20.2
+
+  /@babel/plugin-syntax-import-assertions@7.20.0(@babel/core@7.21.3):
+    resolution: {integrity: sha512-IUh1vakzNoWalR8ch/areW7qFopR2AEw03JlG7BbrDqmQ4X3q9uuipQwSGrUn7oGiemKjtSLDhNtQHzMHr1JdQ==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.21.3
+      '@babel/helper-plugin-utils': 7.20.2
+    dev: true
 
   /@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.19.3):
     resolution: {integrity: sha512-lY6kdGpWHvjoe2vk4WrAapEuBR69EMxZl+RoGRhrFGNYVK8mOPAW8VfbT/ZgrFbXlDNiiaxQnAtgVCZ6jv30EA==}
@@ -4171,6 +4182,11 @@ packages:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.3.0(postcss@8.4.17)
     dev: true
+
+  /@tauri-apps/api@1.2.0:
+    resolution: {integrity: sha512-lsI54KI6HGf7VImuf/T9pnoejfgkNoXveP14pVV7XarrQ46rOejIVJLFqHI9sRReJMGdh2YuCoI3cc/yCWCsrw==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
 
   /@tauri-apps/cli-darwin-arm64@1.2.2:
     resolution: {integrity: sha512-W+Cp2weUMlvmGkRJeUjypbz9Lpl6o98xkgKAtobZSum5SNwpsBQfawJTESakNoD+FXyVg/snIk5sRdHge+tAaA==}
@@ -9822,12 +9838,12 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.2.4(@babel/core@7.19.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0)
+      next: 13.2.4(@babel/core@7.21.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /next@13.2.4(@babel/core@7.19.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0):
+  /next@13.2.4(@babel/core@7.21.3)(react-dom@18.2.0)(react@18.2.0)(sass@1.55.0):
     resolution: {integrity: sha512-g1I30317cThkEpvzfXujf0O4wtaQHtDCLhlivwlTJ885Ld+eOgcz7r3TGQzeU+cSRoNHtD8tsJgzxVdYojFssw==}
     engines: {node: '>=14.6.0'}
     hasBin: true
@@ -9855,7 +9871,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       sass: 1.55.0
-      styled-jsx: 5.1.1(@babel/core@7.19.3)(react@18.2.0)
+      styled-jsx: 5.1.1(@babel/core@7.21.3)(react@18.2.0)
     optionalDependencies:
       '@next/swc-android-arm-eabi': 13.2.4
       '@next/swc-android-arm64': 13.2.4
@@ -12301,7 +12317,7 @@ packages:
       inline-style-parser: 0.1.1
     dev: true
 
-  /styled-jsx@5.1.1(@babel/core@7.19.3)(react@18.2.0):
+  /styled-jsx@5.1.1(@babel/core@7.21.3)(react@18.2.0):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -12314,7 +12330,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      '@babel/core': 7.19.3
+      '@babel/core': 7.21.3
       client-only: 0.0.1
       react: 18.2.0
     dev: false
