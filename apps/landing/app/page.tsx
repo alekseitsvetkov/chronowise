@@ -11,7 +11,7 @@ export default function Home() {
 				<title>Chronowise — A focus timer from the future.</title>
 				<meta
 					name="description"
-					content="Combine your drives and clouds into one database that you can organize and explore from any device. Designed for creators, hoarders and the painfully disorganized."
+					content="Chronowise is a better way to improve your workflow. Meet the new way to increase productivity and reduce stress."
 				/>
 				<meta
 					property="og:image"
