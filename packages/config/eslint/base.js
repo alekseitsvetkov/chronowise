@@ -16,7 +16,11 @@ module.exports = {
 		'prettier',
 		'turbo'
 	],
-	plugins: ['react'],
+	plugins: [
+		{
+			"name": "next"
+		}
+	],
 	rules: {
 		'react/display-name': 'off',
 		'react/prop-types': 'off',
