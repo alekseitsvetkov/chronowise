@@ -1,18 +1,42 @@
 {
-  "$schema": "../../../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "npm run build",
-    "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:8000",
-    "distDir": "../out"
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devPath": "http://localhost:8001",
+    "distDir": "../dist",
+    "withGlobalTauri": false
   },
   "package": {
-    "productName": "Chronowise",
-    "version": "0.1.0"
+    "productName": "chronowise",
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": true,
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "notification": {
+        "all": true
+      },
+      "window": {
+        "all": false,
+        "close": true,
+        "show": true,
+        "startDragging": true
+      },
+      "path": {
+        "all": true
+      },
+      "fs": {
+        "all": true,
+        "scope": [
+          "$APP/*",
+          "$DESKTOP/*",
+          "$RESOURCE/*"
+        ]
+      }
     },
     "bundle": {
       "active": true,
@@ -29,16 +53,18 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.chronowise.desktop",
       "longDescription": "",
       "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
         "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
+        "minimumSystemVersion": "10.15",
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "entitlements": null
       },
-      "resources": [],
+      "resources": [
+        "../assets/*"
+      ],
       "shortDescription": "",
       "targets": "all",
       "windows": {
@@ -56,11 +82,20 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
-        "resizable": true,
+        "resizable": false,
         "title": "chronowise",
-        "width": 800
+        "width": 300,
+        "height": 270,
+        "decorations": false,
+        "skipTaskbar": true,
+        "fileDropEnabled": false,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
       }
-    ]
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    }
   }
 }
