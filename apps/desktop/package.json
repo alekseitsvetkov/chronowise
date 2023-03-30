@@ -1,6 +1,6 @@
 {
   "name": "@chronowise/desktop",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "preview": "next build && next start",
@@ -28,6 +28,8 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
+    "@chronowise/eslint-config-custom": "workspace:*",
+    "@chronowise/tsconfig": "workspace:*",
     "@tauri-apps/cli": "^1.2.2",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",

@@ -1,17 +1,17 @@
 {
   "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": [
         "^build"
       ],
       "outputs": [
+        "dist/**",
         ".next/**",
         "!.next/cache/**"
-      ],
-      "env": [
-        "NODE_ENV",
-        "PORT"
       ]
     },
     "lint": {
