@@ -8,6 +8,9 @@
       "dependsOn": [
         "^build"
       ],
+      "env": [
+        "NEXT_PUBLIC_APP_URL"
+      ],
       "outputs": [
         "dist/**",
         ".next/**",
