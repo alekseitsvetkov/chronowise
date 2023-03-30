@@ -23,7 +23,7 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
-    "@chronowise/eslint-config-custom": "workspace:*",
+    "eslint-config-custom": "workspace:*",
     "@chronowise/tsconfig": "workspace:*",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",
