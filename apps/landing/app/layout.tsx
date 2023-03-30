@@ -1,4 +1,5 @@
 import { Header, ThemeProvider } from '@/components'
+import {cn} from '@chronowise/ui';
 import '@chronowise/ui/style';
 
 export const metadata = {
@@ -15,18 +16,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-          // className={cn(
-          //   "min-h-screen bg-white font-sans text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-50"
-          // )}
+          className={cn(
+            "min-h-screen bg-white font-sans text-black antialiased dark:bg-black dark:text-white"
+          )}
         >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div 
-          // className="flex min-h-screen flex-col"
+          className="flex min-h-screen flex-col"
           >
             <Header />
-            <div 
-            // className="container flex-1"
-            >{children}</div>
+            <div className="container flex-1">{children}</div>
             {/* <Footer /> */}
           </div>
 				</ThemeProvider>

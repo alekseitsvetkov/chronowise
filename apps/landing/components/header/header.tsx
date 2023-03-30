@@ -1,20 +1,20 @@
 import Link from "next/link"
 
-import { links } from "../../config"
 import { buttonVariants, Icons } from '@chronowise/ui';
-import { ModeToggle } from "../mode-toggle";
+import { siteConfig } from "@/config";
+import { MainNav, ModeToggle } from "@/components";
 
 export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full bg-white dark:bg-black">
       <div className="container flex h-16 items-center">
-        {/* <MainNav /> */}
+        <MainNav />
         {/* <MobileNav /> */}
         <div className="flex flex-1 items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
           <nav className="flex items-center space-x-1">
             <ModeToggle />
             <Link
-              href={links.github}
+              href={siteConfig.links.github}
               target="_blank"
               rel="noreferrer"
             >
@@ -30,7 +30,7 @@ export function Header() {
               </div>
             </Link>
             <Link
-              href={links.discord}
+              href={siteConfig.links.discord}
               target="_blank"
               rel="noreferrer"
             >

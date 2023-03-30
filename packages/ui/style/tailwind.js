@@ -16,6 +16,13 @@ module.exports = function (app, options) {
 		darkMode: 'class',
 		mode: 'jit',
 		theme: {
+			container: {
+				center: true,
+				padding: "1.5rem",
+				screens: {
+					"2xl": "1440px",
+				},
+			},
 			fontFamily: {
 				inter: ["Arial", "sans-serif"],
 			},
