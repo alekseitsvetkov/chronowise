@@ -8,7 +8,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full bg-white dark:bg-black">
       <div className="container flex h-16 items-center">
-        <MainNav />
+        <MainNav items={siteConfig.mainNav} />
         {/* <MobileNav /> */}
         <div className="flex flex-1 items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
           <nav className="flex items-center space-x-1">

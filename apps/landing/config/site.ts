@@ -1,10 +1,13 @@
+import { MainNavItem } from "@/types"
+
 interface SiteConfig {
   name: string
   description: string
   links: {
     github: string
     discord: string
-  }
+  },
+  mainNav: MainNavItem[]
 }
 
 export const siteConfig: SiteConfig = {
@@ -16,4 +19,18 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/alekseytsvetkov/chronowoise",
     discord: "https://discord.com/invite/chronowoise"
   },
+  mainNav: [
+    {
+      title: "Blog",
+      href: "/blog",
+    },
+    {
+      title: "Changelog",
+      href: "/changelog",
+    },
+    {
+      title: "About",
+      href: "/about",
+    },
+  ],
 }
