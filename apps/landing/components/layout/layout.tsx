@@ -1,7 +1,11 @@
 import Head from 'next/head'
 
-import { Header, ThemeProvider } from '@/components'
+import { Header } from '@/components'
 import { siteConfig } from '@/config'
+import { useTheme } from 'next-themes'
+
+import pattern from '../../public/pattern.png'
+import patternDark from '../../public/pattern-dark.png'
 
 import '@chronowise/ui/style'
 
@@ -16,6 +20,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const {theme} = useTheme()
   const url = process.env.NEXT_PUBLIC_APP_URL
   const ogUrl = new URL(`${url}/og.jpg`)
 
@@ -50,15 +55,18 @@ export default function RootLayout({
         <meta property="og:url" content={url?.toString()} />
         <meta property="og:image" content={ogUrl.toString()} />
       </Head>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <div 
-        className="flex min-h-screen flex-col"
-        >
-          <Header />
-          <div className="container flex-1">{children}</div>
-          {/* <Footer /> */}
-        </div>
-      </ThemeProvider>
+      <div 
+        className={`flex min-h-screen flex-col bg-repeat bg-[length:100px_100px]`}
+        style={{
+          backgroundImage: `url(${theme === "dark" ? patternDark.src : pattern.src})`,
+          width: '100%',
+          height: '100%'
+        }}
+      >
+        <Header />
+        <div className="container flex-1">{children}</div>
+        {/* <Footer /> */}
+      </div>
     </>
   )
 }
