@@ -58,7 +58,7 @@ export default function RootLayout({
       <div 
         className={`flex min-h-screen flex-col bg-repeat bg-[length:100px_100px]`}
         style={{
-          backgroundImage: `url(${theme === "dark" ? patternDark.src : pattern.src})`,
+          backgroundImage: `url(${theme !== "light" ? patternDark.src : pattern.src})`,
           width: '100%',
           height: '100%'
         }}
