@@ -1,11 +1,14 @@
-import { siteConfig } from "@/config"
+import { siteConfig } from '@/config'
+import { Html, Head, Main, NextScript } from 'next/document'
+import { cn } from "@chronowise/ui"
 
-export default function Head() {
+export default function Document() {
   const url = process.env.NEXT_PUBLIC_APP_URL
   const ogUrl = new URL(`${url}/og.jpg`)
-
+  
   return (
-    <>
+    <Html lang="en" suppressHydrationWarning>
+      <Head />
       <title>{`${siteConfig.name} - ${siteConfig.description}`}</title>
       <meta charSet="utf-8" />
       <meta name="description" content={siteConfig.description} />
@@ -33,6 +36,10 @@ export default function Head() {
       <meta property="og:description" content={siteConfig.description} />
       <meta property="og:url" content={url?.toString()} />
       <meta property="og:image" content={ogUrl.toString()} />
-    </>
+      <body className={cn("min-h-screen bg-white font-sans text-black antialiased dark:bg-black dark:text-white")}>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
   )
 }
