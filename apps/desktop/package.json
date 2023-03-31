@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preview": "next build && next start",
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
