@@ -16,11 +16,11 @@ export const getOs = (): 'Mac' | 'Windows' | 'Linux' | 'iOS' | 'Android' | null 
 
   const userAgent = window.navigator.userAgent.toLowerCase();
   const osMapping: { [key: string]: 'Mac' | 'Windows' | 'Linux' | 'iOS' | 'Android' } = {
+    iphone: 'iOS',
+    android: 'Android',
     win: 'Windows',
     mac: 'Mac',
     linux: 'Linux',
-    iphone: 'iOS',
-    android: 'Android',
   };
 
   for (const key in osMapping) {

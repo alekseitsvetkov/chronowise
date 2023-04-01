@@ -1,14 +1,12 @@
 "use client"
 
-import { RootLayout } from '@/components'
-import { getDownloadLink, getOs } from '@/utils'
-
-import { Button, Icons } from '@chronowise/ui'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { RootLayout } from '@/components'
+import { getDownloadLink, getOs } from '@/utils'
+import { Button, Icons } from '@chronowise/ui'
 
-// TODO: Migrate coffee-man.svg to component with fill prop
 export default function Home() {
   const url = process.env.NEXT_PUBLIC_APP_URL
 
