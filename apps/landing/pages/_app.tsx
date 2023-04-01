@@ -29,7 +29,7 @@ const SF_PRO_DISPLAY = localFont({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className={`${SF_PRO_DISPLAY.variable} font-sans`}>
+      <div className={`${SF_PRO_DISPLAY.variable} font-sans tracking-wide`}>
         <Component {...pageProps} />
       </div>
     </ThemeProvider>

@@ -12,7 +12,7 @@ export default function Home() {
           <h1 className="fade-in-heading z-30 px-2 text-center text-4xl font-black leading-tight text-black dark:text-white">
             Chronowise is a better way<br />to improve your workflow
           </h1>
-          <p className="mt-3 text-center text-lg mb-12 text-gray-300">
+          <p className="mt-3 text-center text-lg mb-12 text-gray-400">
             Meet the new way to increase productivity and<br />reduce stress.
           </p>
           <Button
