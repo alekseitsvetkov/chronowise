@@ -2,7 +2,7 @@ import { getOs } from '@/utils';
 
 // WIP
 // https://github.com/USER/PROJECT/releases/latest/download/package.zip
-export const getDownloadLink = (osName: 'Mac' | 'Windows' | 'Linux') => {
+export const getDownloadLink = (osName: "Mac" | "Windows" | "Linux" | "iOS" | "Android") => {
   const user = "alekseytsvetkov";
   const project = "chronowise";
   const os = osName.toLowerCase();

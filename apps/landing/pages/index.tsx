@@ -1,12 +1,12 @@
 "use client"
 
 import { RootLayout } from '@/components'
-import { getDownloadLink, getOs } from '@/utils';
+import { getDownloadLink, getOs } from '@/utils'
 
 import { Button, Icons } from '@chronowise/ui'
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 // TODO: Migrate coffee-man.svg to component with fill prop
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
   const {resolvedTheme} = useTheme()
 
   const [currentCoffeeManUrl, setCurrentCoffeeManUrl] = useState<string | null>(null)
-  const [os, setOs] = useState<'Mac' | 'Windows' | 'Linux' | null>(null);
+  const [currentOs, setCurrentOs] = useState<'Mac' | 'Windows' | 'Linux' | null>(null);
 
   useEffect(() => {
     const coffeeManUrl = new URL(`${url}/coffee-man.svg`)
@@ -29,13 +29,17 @@ export default function Home() {
   }, [resolvedTheme, url])
 
   useEffect(() => {
-    setOs(getOs())
+    const os = getOs();
+
+    if (os !== 'iOS' && os !== 'Android') {
+      setCurrentOs(os)
+    }
   }, [])
 
   const handleDownloadClick = () => {
-    if(!os) return;
+    if (!currentOs) return;
 
-    const link = getDownloadLink(os)
+    const link = getDownloadLink(currentOs)
     window.open(link, '_blank')
   }
 
@@ -49,7 +53,7 @@ export default function Home() {
           <p className="animation-delay-1 fade-in mt-3 text-center text-lg mb-12 text-gray-400">
             Meet the new way to increase productivity and<br />reduce stress.
           </p>
-          {!!os && <Button
+          {!!currentOs && <Button
             onClick={handleDownloadClick}
             variant="default"
             className="animation-delay-2 fade-in text-base focus:ring-0 align-bottom shadow-lg shadow-gray-400 dark:shadow-none"
@@ -58,7 +62,7 @@ export default function Home() {
             <Icons.apple className="h-4 w-4 mr-2 mb-[2px] fill-current" />
             <span className="text-[0px] leading-none">
               <span className="font-medium text-base leading-none">
-                Download for {os}
+                Download for {currentOs}
               </span>
             </span>
           </Button>}
