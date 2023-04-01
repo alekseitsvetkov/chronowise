@@ -61,7 +61,7 @@ export default function Home() {
             <br />
             to improve your workflow
           </h1>
-          <p className="animation-delay-1 fade-in mt-3 text-center text-lg mb-12 text-gray-400">
+          <p className="animation-delay-1 fade-in mt-3 text-center text-lg text-gray-400">
             Meet the new way to increase productivity and
             <br />
             reduce stress.
@@ -70,7 +70,7 @@ export default function Home() {
             <Button
               onClick={handleDownloadClick}
               variant="default"
-              className="animation-delay-2 fade-in text-base focus:ring-0 align-bottom shadow-lg shadow-gray-400 dark:shadow-none"
+              className="animation-delay-2 fade-in text-base focus:ring-0 align-bottom shadow-lg shadow-gray-400 dark:shadow-none mt-12"
               size="lg"
             >
               <Icons.apple className="h-4 w-4 mr-2 mb-[2px] fill-current" />
