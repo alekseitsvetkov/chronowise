@@ -4,6 +4,7 @@ import * as React from "react"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 import { cn } from "../../lib"
+import { SF_PRO_DISPLAY } from "../theme-provider/theme-provider"
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 
@@ -63,6 +64,7 @@ const DropdownMenuContent = React.forwardRef<
       sideOffset={sideOffset}
       className={cn(
         "animate-in data-[side=right]:slide-in-from-left-2 data-[side=left]:slide-in-from-right-2 data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] overflow-hidden rounded-md border border-white bg-white p-1 text-black shadow-md dark:border-gray-800 dark:bg-gray-900 dark:text-white",
+        `${SF_PRO_DISPLAY.variable} font-sans tracking-wide`,
         className
       )}
       {...props}
@@ -80,7 +82,7 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm py-1.5 px-2 text-sm font-medium outline-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-gray-800",
+      "relative flex cursor-default select-none items-center rounded-sm py-1.5 px-2 text-sm font-regular outline-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-gray-800",
       inset && "pl-8",
       className
     )}
@@ -143,7 +145,7 @@ const DropdownMenuLabel = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={cn(
-      "px-2 py-1.5 text-sm font-bold text-slate-900 dark:text-slate-300",
+      "px-2 py-1.5 text-sm font-medium text-slate-900 dark:text-slate-300",
       inset && "pl-8",
       className
     )}
