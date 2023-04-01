@@ -33,12 +33,12 @@ export default function Home() {
           <h1 className="fade-in-heading z-30 px-2 text-center text-4xl font-black leading-tight text-black dark:text-white">
             Chronowise is a better way<br />to improve your workflow
           </h1>
-          <p className="mt-3 text-center text-lg mb-12 text-gray-400">
+          <p className="animation-delay-1 fade-in mt-3 text-center text-lg mb-12 text-gray-400">
             Meet the new way to increase productivity and<br />reduce stress.
           </p>
           <Button
             variant="default"
-            className="text-base focus:ring-0 align-bottom shadow-lg shadow-gray-400 dark:shadow-none"
+            className="animation-delay-2 fade-in text-base focus:ring-0 align-bottom shadow-lg shadow-gray-400 dark:shadow-none"
             size="lg"
           >
             <Icons.apple className="h-4 w-4 mr-2 mb-[2px] fill-current" />
@@ -51,7 +51,7 @@ export default function Home() {
           {!!currentCoffeeManUrl && 
             <Image
               src={`${currentCoffeeManUrl}`}
-              className="my-24"
+              className="fade-in-image my-24"
               color="currentColor"
               alt="coffee man"
               width="400"
