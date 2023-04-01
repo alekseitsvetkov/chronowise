@@ -3,8 +3,28 @@
 import { RootLayout } from '@/components'
 
 import { Button, Icons } from '@chronowise/ui'
+import { useTheme } from 'next-themes';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const url = process.env.NEXT_PUBLIC_APP_URL
+
+  const {resolvedTheme} = useTheme()
+
+  const [currentCoffeeManUrl, setCurrentCoffeeManUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    const coffeeManUrl = new URL(`${url}/coffee-man.svg`)
+    const coffeeManDarkUrl = new URL(`${url}/coffee-man-dark.svg`)
+
+    if (resolvedTheme === 'dark') {
+      setCurrentCoffeeManUrl(`${coffeeManDarkUrl}`)
+    } else {
+      setCurrentCoffeeManUrl(`${coffeeManUrl}`)
+    }
+  }, [resolvedTheme, url])
+  
   return (
     <>
       <RootLayout>
@@ -27,6 +47,16 @@ export default function Home() {
               </span>
             </span>
           </Button>
+          {!!currentCoffeeManUrl && 
+            <Image
+              src={`${currentCoffeeManUrl}`}
+              className="mt-24"
+              color="currentColor"
+              alt="coffee man"
+              width="400"
+              height="310"
+            />
+          }
         </div>
       </RootLayout>
     </>
