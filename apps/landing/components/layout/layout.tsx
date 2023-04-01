@@ -63,11 +63,9 @@ export default function RootLayout({
         <meta property="og:image" content={ogUrl.toString()} />
       </Head>
       <div 
-        className={`flex min-h-screen flex-col bg-repeat bg-[length:100px_100px]`}
+        className="flex min-h-screen flex-col w-full h-full bg-repeat bg-[length:100px_100px]"
         style={{
           ...backgroundImage ? { backgroundImage } : {},
-          width: '100%',
-          height: '100%'
         }}
       >
         <Header />
