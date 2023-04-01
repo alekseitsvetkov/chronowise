@@ -1,6 +1,7 @@
 "use client"
 
 import { RootLayout } from '@/components'
+import { getDownloadLink, getOs } from '@/utils';
 
 import { Button, Icons } from '@chronowise/ui'
 import { useTheme } from 'next-themes';
@@ -14,6 +15,7 @@ export default function Home() {
   const {resolvedTheme} = useTheme()
 
   const [currentCoffeeManUrl, setCurrentCoffeeManUrl] = useState<string | null>(null)
+  const [os, setOs] = useState<'Mac' | 'Windows' | 'Linux' | null>(null);
 
   useEffect(() => {
     const coffeeManUrl = new URL(`${url}/coffee-man.svg`)
@@ -25,7 +27,18 @@ export default function Home() {
       setCurrentCoffeeManUrl(`${coffeeManUrl}`)
     }
   }, [resolvedTheme, url])
-  
+
+  useEffect(() => {
+    setOs(getOs())
+  }, [])
+
+  const handleDownloadClick = () => {
+    if(!os) return;
+
+    const link = getDownloadLink(os)
+    window.open(link, '_blank')
+  }
+
   return (
     <>
       <RootLayout>
@@ -36,7 +49,8 @@ export default function Home() {
           <p className="animation-delay-1 fade-in mt-3 text-center text-lg mb-12 text-gray-400">
             Meet the new way to increase productivity and<br />reduce stress.
           </p>
-          <Button
+          {!!os && <Button
+            onClick={handleDownloadClick}
             variant="default"
             className="animation-delay-2 fade-in text-base focus:ring-0 align-bottom shadow-lg shadow-gray-400 dark:shadow-none"
             size="lg"
@@ -44,10 +58,10 @@ export default function Home() {
             <Icons.apple className="h-4 w-4 mr-2 mb-[2px] fill-current" />
             <span className="text-[0px] leading-none">
               <span className="font-medium text-base leading-none">
-                Download for Mac
+                Download for {os}
               </span>
             </span>
-          </Button>
+          </Button>}
           {!!currentCoffeeManUrl && 
             <Image
               src={`${currentCoffeeManUrl}`}
