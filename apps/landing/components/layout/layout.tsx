@@ -8,6 +8,7 @@ import pattern from '../../public/pattern.png'
 import patternDark from '../../public/pattern-dark.png'
 
 import '@chronowise/ui/style'
+import { useEffect, useMemo, useState } from 'react'
 
 export const metadata = {
   title: 'Chronowise — A focus timer from the future.',
@@ -23,6 +24,12 @@ export default function RootLayout({
   const {theme} = useTheme()
   const url = process.env.NEXT_PUBLIC_APP_URL
   const ogUrl = new URL(`${url}/og.jpg`)
+
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
+
+  useEffect(() => {
+    setBackgroundImage(`url(${theme === 'light' ? pattern.src : patternDark.src})`)
+  }, [theme])
 
   return (
     <>
@@ -58,7 +65,7 @@ export default function RootLayout({
       <div 
         className={`flex min-h-screen flex-col bg-repeat bg-[length:100px_100px]`}
         style={{
-          backgroundImage: `url(${theme !== "light" ? patternDark.src : pattern.src})`,
+          ...backgroundImage ? { backgroundImage } : {},
           width: '100%',
           height: '100%'
         }}
