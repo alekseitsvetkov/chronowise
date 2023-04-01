@@ -7,6 +7,7 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
+// TODO: Migrate coffee-man.svg to component with fill prop
 export default function Home() {
   const url = process.env.NEXT_PUBLIC_APP_URL
 
@@ -50,7 +51,7 @@ export default function Home() {
           {!!currentCoffeeManUrl && 
             <Image
               src={`${currentCoffeeManUrl}`}
-              className="mt-24"
+              className="my-24"
               color="currentColor"
               alt="coffee man"
               width="400"
