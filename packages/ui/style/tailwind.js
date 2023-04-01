@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
 function alpha(variableName) {
 	// some tailwind magic to allow us to specify opacity with CSS variables (eg: bg-app/80)
@@ -24,8 +25,8 @@ module.exports = function (app, options) {
 				},
 			},
 			fontFamily: {
-				inter: ["Arial", "sans-serif"],
-			},
+        sans: ['var(--font-sf-pro-display)', ...fontFamily.sans],
+      },
 			fontSize: {
 				'tiny': '.65rem',
 				'xs': '.75rem',
