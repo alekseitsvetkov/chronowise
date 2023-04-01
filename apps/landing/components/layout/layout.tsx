@@ -1,11 +1,9 @@
 import Head from 'next/head'
 
-import { Header } from '@/components'
+import { Header, Footer } from '@/components'
 import { siteConfig } from '@/config'
-import { useTheme } from 'next-themes'
 
 import '@chronowise/ui/style'
-import { useEffect, useState } from 'react'
 
 export const metadata = {
   title: 'Chronowise — A focus timer from the future.',
@@ -57,7 +55,7 @@ export default function RootLayout({
       >
         <Header />
         <div className="container flex-1">{children}</div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   )
