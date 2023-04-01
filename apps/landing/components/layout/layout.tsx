@@ -4,8 +4,8 @@ import { Header } from '@/components'
 import { siteConfig } from '@/config'
 import { useTheme } from 'next-themes'
 
-import pattern from '../../public/pattern.png'
-import patternDark from '../../public/pattern-dark.png'
+import pattern from '../../public/pattern.svg'
+import patternDark from '../../public/pattern-dark.svg'
 
 import '@chronowise/ui/style'
 import { useEffect, useMemo, useState } from 'react'
