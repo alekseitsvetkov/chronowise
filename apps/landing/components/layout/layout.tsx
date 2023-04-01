@@ -4,9 +4,6 @@ import { Header } from '@/components'
 import { siteConfig } from '@/config'
 import { useTheme } from 'next-themes'
 
-import pattern from '../../public/pattern.svg'
-import patternDark from '../../public/patternDark.svg'
-
 import '@chronowise/ui/style'
 import { useEffect, useState } from 'react'
 
@@ -21,15 +18,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const {theme} = useTheme()
   const url = process.env.NEXT_PUBLIC_APP_URL
   const ogUrl = new URL(`${url}/og.jpg`)
-
-  const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
-
-  useEffect(() => {
-    setBackgroundImage(`url(${theme === 'light' ? pattern.src : patternDark.src})`)
-  }, [theme])
 
   return (
     <>
@@ -63,10 +53,7 @@ export default function RootLayout({
         <meta property="og:image" content={ogUrl.toString()} />
       </Head>
       <div 
-        className="flex min-h-screen flex-col w-full h-full bg-repeat bg-[length:100px_100px]"
-        style={{
-          ...backgroundImage ? { backgroundImage } : {},
-        }}
+        className="flex min-h-screen flex-col"
       >
         <Header />
         <div className="container flex-1">{children}</div>
