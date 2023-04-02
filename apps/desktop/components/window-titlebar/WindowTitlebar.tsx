@@ -31,7 +31,7 @@ export function WindowTitlebar() {
     <>
       <div data-tauri-drag-region className="titlebar">
           <div onClick={windowMinimize} className="titlebar-button hover:cursor-pointer" id="titlebar-minimize">
-            <Image src="https://api.iconify.design/mdi:window-minimize.svgcolor=white" alt="minimize" />
+            <Image src="https://api.iconify.design/mdi:window-minimize.svg?color=white" alt="minimize" />
           </div>
           <div className="titlebar-button hover:cursor-pointer" id="titlebar-maximize">
             <Image src="https://api.iconify.design/mdi:window-maximize.svg?color=gray" alt="maximize" />
