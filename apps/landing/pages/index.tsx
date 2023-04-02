@@ -1,12 +1,14 @@
 "use client";
 
-import { RootLayout } from "@/components";
-import { getDownloadLink, getOs } from "@/utils";
+import { RootLayout } from "@/components"
+import { getDownloadLink, getOs } from "@/utils"
 
-import { Button, Icons } from "@chronowise/ui";
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { Button, Icons } from "@chronowise/ui"
+import { useTheme } from "next-themes"
+import Image from "next/image"
+import { useEffect, useMemo, useState } from "react"
+
+import {version} from '@chronowise/desktop/package.json'
 
 import coffeeMan from '/public/coffee-man.svg'
 import coffeeManDark from '/public/coffee-man-dark.svg'
@@ -105,11 +107,10 @@ export default function Home() {
                     </span>
                   </span>
                 </Button>
-                {/* TODO: get version from packages.json desktop app */}
                 <div className="animation-delay-2 fade-in text-gray-400">
-                  {currentOs === "Mac" && "v0.0.1 | macOS 11+ | Install via Homebrew"}
-                  {currentOs === "Windows" && "v0.0.1 | Windows 10+ | Install via Scoop"}
-                  {currentOs === "Linux" && "v0.0.1 | Linux | Install via Snap"}
+                  {currentOs === "Mac" && `v${version} | macOS 11+`}
+                  {currentOs === "Windows" && `v${version} | Windows 10+`}
+                  {currentOs === "Linux" && `v${version} | Linux`}
                 </div>
               </>
             )}
