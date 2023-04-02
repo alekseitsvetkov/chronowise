@@ -16,8 +16,8 @@ export const siteConfig: SiteConfig = {
   description:
     "is a better way to improve your workflow",
   links: {
-    github: "https://github.com/alekseytsvetkov/chronowoise",
-    discord: "https://discord.com/invite/chronowoise",
+    github: "https://github.com/alekseytsvetkov/chronowaise",
+    discord: "https://discord.gg/thRBmKzCgM",
   },
   mainNav: [
     {
