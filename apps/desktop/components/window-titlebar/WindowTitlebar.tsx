@@ -14,15 +14,18 @@ export function WindowTitlebar() {
     setupAppWindow()
   }, []) 
 
-  function windowMinimize() {
-    appWindow?.minimize()
-  }
+  // function windowMinimize() {
+  //   appWindow?.minimize()
+  // }
   // function windowToggleMaximize() {
   //   appWindow?.toggleMaximize()
   // }
   // function windowClose() {
   //   appWindow?.close()
   // }
+  function windowHide() {
+    appWindow?.hide()
+  }
 
   return (
     <>
@@ -33,7 +36,7 @@ export function WindowTitlebar() {
           <div className="titlebar-button hover:cursor-pointer" id="titlebar-maximize">
             <Image src="https://api.iconify.design/mdi:window-maximize.svg?color=gray" alt="maximize" />
           </div>
-          <div onClick={windowMinimize} className="titlebar-button titlebar-button--close hover:cursor-pointer" id="titlebar-close">
+          <div onClick={windowHide} className="titlebar-button titlebar-button--close hover:cursor-pointer" id="titlebar-close">
             <Image src="https://api.iconify.design/mdi:close.svg?color=white" alt="close" />
           </div>
         </div>

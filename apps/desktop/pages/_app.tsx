@@ -4,7 +4,6 @@ import { WindowTitlebar } from '@/components'
 
 import '@chronowise/ui/style'
 
-
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
