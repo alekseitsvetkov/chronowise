@@ -12,6 +12,7 @@
   "dependencies": {
     "@chronowise/assets": "workspace:*",
     "@chronowise/ui": "workspace:*",
+    "@chronowise/desktop": "workspace:*",
     "@types/node": "^18.7.10",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
