@@ -14,9 +14,9 @@ export function WindowTitlebar() {
     setupAppWindow()
   }, []) 
 
-  // function windowMinimize() {
-  //   appWindow?.minimize()
-  // }
+  function windowMinimize() {
+    appWindow?.minimize()
+  }
   // function windowToggleMaximize() {
   //   appWindow?.toggleMaximize()
   // }
@@ -30,8 +30,8 @@ export function WindowTitlebar() {
   return (
     <>
       <div data-tauri-drag-region className="titlebar">
-          <div className="titlebar-button hover:cursor-pointer" id="titlebar-minimize">
-            <Image src="https://api.iconify.design/mdi:window-minimize.svg?color=gray" alt="minimize" />
+          <div onClick={windowMinimize} className="titlebar-button hover:cursor-pointer" id="titlebar-minimize">
+            <Image src="https://api.iconify.design/mdi:window-minimize.svgcolor=white" alt="minimize" />
           </div>
           <div className="titlebar-button hover:cursor-pointer" id="titlebar-maximize">
             <Image src="https://api.iconify.design/mdi:window-maximize.svg?color=gray" alt="maximize" />
