@@ -110,7 +110,7 @@ export default function Home() {
           />
           <hr className="border-t border-t-gray-150 dark:border-t-gray-550 w-full" />
           <section className="fade-in-down container grid justify-center gap-6 pt-48">
-            <div className="mx-auto flex flex-col gap-4 md:max-w-[52rem] items-center">
+            <div className="mx-auto flex flex-col gap-4 md:max-w-[52rem] items-center px-4">
               <h2 className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-3xl md:text-6xl">
                 Features
               </h2>
