@@ -33,9 +33,6 @@ export const App: FC = () => {
         <div className="hover:cursor-pointer" onClick={reset}>
           <Icons.reset size={20} color="#FFFFFF" />
         </div>
-        {/* <div className="hover:cursor-pointer">
-          <Icons.bellRing size={20} color="#FFFFFF" />
-        </div> */}
       </div>
       <div className="flex flex-row justify-between items-end pt-2">
         <div>

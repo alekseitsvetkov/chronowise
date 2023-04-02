@@ -86,8 +86,8 @@ fn create_system_tray() -> SystemTray {
 fn main() {
   tauri::Builder::default()
       .setup(|app| {
-          #[cfg(target_os = "macos")]
-          app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+        //   #[cfg(target_os = "macos")]
+        //   app.set_activation_policy(tauri::ActivationPolicy::Accessory);
           
           let win = app.get_window("main").unwrap();
           #[cfg(target_os = "macos")]

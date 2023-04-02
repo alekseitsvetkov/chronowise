@@ -86,7 +86,6 @@
         "width": 300,
         "height": 270,
         "decorations": false,
-        "skipTaskbar": true,
         "fileDropEnabled": false,
         "titleBarStyle": "Overlay",
         "hiddenTitle": true
