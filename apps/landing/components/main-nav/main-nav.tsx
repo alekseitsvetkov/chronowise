@@ -1,11 +1,13 @@
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 
 import { NavItem } from "@/types"
 import { siteConfig } from "@/config/site"
-
+import { ModeToggle } from "@/components"
 import {
   Button,
+  buttonVariants,
   cn,
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +17,7 @@ import {
   DropdownMenuTrigger,
   Icons
 } from "@chronowise/ui"
+// import AppIcon from '/public/app-icon.png'
 
 interface MainNavProps {
   items?: NavItem[]
@@ -22,10 +25,18 @@ interface MainNavProps {
 
 export function MainNav({ items }: MainNavProps) {
   return (
-    <div className="flex gap-6 md:gap-10">
+    <div className="flex flex-1 justify-between">
       <Link href="/" className="hidden items-center space-x-2 md:flex">
         <Icons.logo className="h-7 w-9" />
-        <span className="hidden font-bold sm:inline-block">
+        {/* <Image
+          priority
+          src={AppIcon}
+          className="mr-2"
+          alt="app logo"
+          width="32"
+          height="32"
+        /> */}
+        <span className="hidden text-xl font-bold sm:inline-block">
           {siteConfig.name}
         </span>
       </Link>
@@ -79,6 +90,43 @@ export function MainNav({ items }: MainNavProps) {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
+      <div className="flex items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
+        <nav className="flex items-center space-x-1">
+          <ModeToggle />
+          <Link
+            href={siteConfig.links.github}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div
+              className={buttonVariants({
+                size: "sm",
+                variant: "ghost",
+                className: "text-black dark:text-white",
+              })}
+            >
+              <Icons.gitHub className="h-5 w-5" />
+              <span className="sr-only">GitHub</span>
+            </div>
+          </Link>
+          <Link
+            href={siteConfig.links.discord}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div
+              className={buttonVariants({
+                size: "sm",
+                variant: "ghost",
+                className: "text-black dark:text-white",
+              })}
+            >
+              <Icons.discord className="h-5 w-5 fill-current" />
+              <span className="sr-only">Discord</span>
+            </div>
+          </Link>
+        </nav>
+      </div>
     </div>
   )
 }
