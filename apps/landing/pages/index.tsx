@@ -62,9 +62,9 @@ export default function Home() {
               A better way to improve your workflow
             </h1>
             <p className="animation-delay-1 fade-in leading-normal text-gray-500 dark:text-gray-200 sm:text-xl sm:leading-8 text-center">
-              Chronowise is a blazingly fast, tiny focus timer. It lets you
+              Chronowise is a blazingly fast, tiny focus timer.
               <br />
-              increase productivity, reduce stress and much more.
+              It lets you increase productivity, reduce stress and much more.
             </p>
           </div>
           {currentOs && (
