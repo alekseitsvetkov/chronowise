@@ -6,7 +6,7 @@ import { MainNav, ModeToggle } from "@/components";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 w-full border-transparent bg-transparent border-gray-550 bg-white dark:bg-gray-850">
+    <header className="sticky top-0 z-40 w-full border-transparent bg-white/80 border-gray-550 backdrop-blur dark:bg-gray-850/80">
       <div className="container flex h-14 items-center border-b border-b-gray-150 dark:border-b-gray-550">
         <MainNav items={siteConfig.mainNav} />
         {/* <MobileNav /> */}
