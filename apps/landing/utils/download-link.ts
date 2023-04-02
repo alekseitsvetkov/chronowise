@@ -1,4 +1,4 @@
-import version from '@chronowise/desktop/package.json'
+import * as desktop from '@chronowise/desktop/package.json'
 
 export const getDownloadLink = (osName: "Mac" | "Windows" | "Linux" | "iOS" | "Android") => {
   const user = "alekseytsvetkov";
@@ -11,9 +11,9 @@ export const getDownloadLink = (osName: "Mac" | "Windows" | "Linux" | "iOS" | "A
   // chronowise_0.0.1_x64_en-US.msi
 
   const filename = {
-    mac: `chronowise_${version}_x64.dmg`,
-    windows: `chronowise_${version}_x64_en-US.msi`,
-    linux: `chronowise_${version}_amd64.AppImage`,
+    mac: `chronowise_${desktop.version}_x64.dmg`,
+    windows: `chronowise_${desktop.version}_x64_en-US.msi`,
+    linux: `chronowise_${desktop.version}_amd64.AppImage`,
   }[os];
 
   return `https://github.com/${user}/${project}/releases/latest/download/${filename}`;

@@ -8,7 +8,7 @@ import { useTheme } from "next-themes"
 import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 
-import version from '@chronowise/desktop/package.json'
+import * as desktop from '@chronowise/desktop/package.json'
 
 import coffeeMan from '/public/coffee-man.svg'
 import coffeeManDark from '/public/coffee-man-dark.svg'
@@ -108,9 +108,9 @@ export default function Home() {
                   </span>
                 </Button>
                 <div className="animation-delay-2 fade-in text-gray-400">
-                  {currentOs === "Mac" && `v${version} | macOS 11+`}
-                  {currentOs === "Windows" && `v${version} | Windows 10+`}
-                  {currentOs === "Linux" && `v${version} | Linux`}
+                  {currentOs === "Mac" && `v${desktop.version} | macOS 11+`}
+                  {currentOs === "Windows" && `v${desktop.version} | Windows 10+`}
+                  {currentOs === "Linux" && `v${desktop.version} | Linux`}
                 </div>
               </>
             )}
