@@ -90,7 +90,7 @@ export function MainNav({ items }: MainNavProps) {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="flex items-center justify-between space-x-2 sm:space-x-4 md:justify-end min-w-[160px]">
+      <div className="flex items-center space-x-2 sm:space-x-4 md:justify-end min-w-[160px] justify-end">
         <nav className="flex items-center space-x-1">
           <ModeToggle />
           <Link
