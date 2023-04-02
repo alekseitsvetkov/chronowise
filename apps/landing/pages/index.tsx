@@ -8,7 +8,7 @@ import { useTheme } from "next-themes"
 import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 
-import {version} from '@chronowise/desktop/package.json'
+import version from '@chronowise/desktop/package.json'
 
 import coffeeMan from '/public/coffee-man.svg'
 import coffeeManDark from '/public/coffee-man-dark.svg'

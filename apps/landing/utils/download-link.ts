@@ -1,4 +1,4 @@
-import {version} from '@chronowise/desktop/package.json'
+import version from '@chronowise/desktop/package.json'
 
 export const getDownloadLink = (osName: "Mac" | "Windows" | "Linux" | "iOS" | "Android") => {
   const user = "alekseytsvetkov";
