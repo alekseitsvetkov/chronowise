@@ -26,7 +26,7 @@ interface MainNavProps {
 export function MainNav({ items }: MainNavProps) {
   return (
     <div className="flex flex-1 justify-between">
-      <Link href="/" className="hidden items-center space-x-2 md:flex">
+      <Link href="/" className="hidden items-center space-x-2 md:flex min-w-[160px]">
         <Icons.logo className="h-7 w-9" />
         {/* <Image
           priority
@@ -90,7 +90,7 @@ export function MainNav({ items }: MainNavProps) {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="flex items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
+      <div className="flex items-center justify-between space-x-2 sm:space-x-4 md:justify-end min-w-[160px]">
         <nav className="flex items-center space-x-1">
           <ModeToggle />
           <Link
