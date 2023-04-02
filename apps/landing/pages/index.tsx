@@ -57,7 +57,7 @@ export default function Home() {
     <>
       <RootLayout>
         <div className="flex w-full flex-col items-center my-24">
-          <div className="mx-auto flex flex-col items-center gap-4">
+          <div className="mx-auto flex flex-col items-center gap-4 px-4">
             <h1 className="fade-in-heading z-30 text-center text-black dark:text-white text-3xl font-bold leading-[1.1] tracking-tight sm:text-3xl md:text-6xl">
               A better way to improve your workflow
             </h1>
@@ -110,7 +110,7 @@ export default function Home() {
           />
           <hr className="border-t border-t-gray-150 dark:border-t-gray-550 w-full" />
           <section className="fade-in-down container grid justify-center gap-6 pt-48">
-            <div className="mx-auto flex flex-col gap-4 md:max-w-[52rem] items-center px-4">
+            <div className="mx-auto flex flex-col gap-4 md:max-w-[52rem] items-center">
               <h2 className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-3xl md:text-6xl">
                 Features
               </h2>
