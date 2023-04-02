@@ -8,7 +8,7 @@ import { useTheme } from "next-themes"
 import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 
-import * as desktop from '@chronowise/desktop/package.json'
+import desktop from '@chronowise/desktop/package.json'
 
 import coffeeMan from '/public/coffee-man.svg'
 import coffeeManDark from '/public/coffee-man-dark.svg'
@@ -76,14 +76,17 @@ export default function Home() {
     <>
       <RootLayout>
         <div className="flex w-full flex-col items-center mb-16 2xl:mt-32 xl:mt-28 lg:mt-20 md:mt-18 sm:mt-20 mt-16">
-          {!!coffeeManImage && <Image
-            src={coffeeManImage}
-            className="animation-delay-2 fade-in mb-6 px-4"
-            alt="coffee man"
-            width="300"
-            height="231"
-          />}
-          <div className="mx-auto flex flex-col items-center gap-4 px-4 2xl:mb-40 xl:mb-28 lg:mb-20 md:mb-18 sm:mb-20 mb-16">
+          {!!coffeeManImage &&
+            <Image
+              priority
+              src={coffeeManImage}
+              className="animation-delay-2 fade-in mb-6 px-4"
+              alt="coffee man"
+              width="300"
+              height="231"
+            />
+          }
+          <div className="mx-auto flex flex-col items-center gap-4 px-4 2xl:mb-36 xl:mb-28 lg:mb-20 md:mb-18 sm:mb-20 mb-16">
             <h1 className="fade-in-heading z-30 text-center text-black dark:text-white text-3xl font-bold leading-[1.1] tracking-tight sm:text-3xl md:text-6xl">
               A better way to improve your workflow
             </h1>
@@ -117,6 +120,7 @@ export default function Home() {
           </div>
           <Image
             src={appInterface}
+            priority
             className="animation-delay-2 fade-in -mb-40"
             alt="application interface"
             width="365"

@@ -4,11 +4,63 @@ import { Header, Footer } from '@/components'
 import { siteConfig } from '@/config'
 
 import '@chronowise/ui/style'
+import { absoluteUrl } from '@/lib'
 
 export const metadata = {
-  title: 'Chronowise — A focus timer from the future.',
-  // TODO: change this to a better description
-  description: 'Chronowise is a better way to improve your workflow. Meet the new way to increase productivity and reduce stress.',
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Focus Timer",
+    "Pomodoro Timer",
+    "Pomodoro",
+    "Time tracker",
+    "Time management",
+    "Productivity",
+    "Workflow",
+    "Reduce stress",
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "Server Components",
+    "Radix UI",
+    "Tauri",
+  ],
+  authors: [
+    {
+      name: "alekseytsvetkov",
+      url: "https://github.com/alekseytsvetkov",
+    },
+  ],
+  creator: "alekseytsvetkov",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: absoluteUrl("/og.jpg"),
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: `${siteConfig.url}/site.webmanifest`,
 }
 
 export default function RootLayout({

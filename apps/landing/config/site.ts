@@ -1,20 +1,12 @@
-import { MainNavItem } from "@/types"
-
-interface SiteConfig {
-  name: string
-  description: string
-  links: {
-    github: string
-    discord: string
-  },
-  mainNav: MainNavItem[]
-}
+import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
   name: "Chronowise",
   // TODO: change this to a better description
   description:
     "is a better way to improve your workflow",
+  url: "https://chronowise.vercel.app",
+  ogImage: "https://chronowise.vercel.app/og.jpg",
   links: {
     github: "https://github.com/alekseytsvetkov/chronowise",
     discord: "https://discord.gg/thRBmKzCgM",
