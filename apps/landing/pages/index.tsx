@@ -6,7 +6,7 @@ import { getDownloadLink, getOs } from "@/utils";
 import { Button, Icons } from "@chronowise/ui";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 
 export default function Home() {
   const url = process.env.NEXT_PUBLIC_APP_URL;
@@ -16,6 +16,16 @@ export default function Home() {
 
   const [currentCoffeeManUrl, setCurrentCoffeeManUrl] = useState<string | null>(null);
   const [currentOs, setCurrentOs] = useState<"Mac" | "Windows" | "Linux" | null>(null);
+
+  const osIcon = useMemo(() => {
+    if (currentOs === "Mac") {
+      return <Icons.apple className="h-6 w-6 mr-2 mb-[2px] fill-current" />
+    } else if (currentOs === "Windows") {
+      return <Icons.windows className="h-6 w-6 mr-2 mb-[2px] fill-current" />
+    } else if (currentOs === "Linux") {
+      return <Icons.linux className="h-6 w-6 mr-2 mb-[2px] fill-current" />
+    }
+  }, [currentOs]);
 
   const updateCoffeeManUrl = useCallback(() => {
     const coffeeManUrl = new URL(`${url}/coffee-man.svg`);
@@ -56,8 +66,17 @@ export default function Home() {
   return (
     <>
       <RootLayout>
-        <div className="flex w-full flex-col items-center my-24">
-          <div className="mx-auto flex flex-col items-center gap-4 px-4">
+        <div className="flex w-full flex-col items-center mb-16 2xl:mt-32 xl:mt-28 lg:mt-20 md:mt-18 sm:mt-20 mt-16">
+          {currentCoffeeManUrl && (
+            <Image
+              src={`${currentCoffeeManUrl}`}
+              className="animation-delay-2 fade-in mb-6 px-4"
+              alt="coffee man"
+              width="300"
+              height="231"
+            />
+          )}
+          <div className="mx-auto flex flex-col items-center gap-4 px-4 2xl:mb-52 xl:mb-28 lg:mb-20 md:mb-18 sm:mb-20 mb-16">
             <h1 className="fade-in-heading z-30 text-center text-black dark:text-white text-3xl font-bold leading-[1.1] tracking-tight sm:text-3xl md:text-6xl">
               A better way to improve your workflow
             </h1>
@@ -66,38 +85,28 @@ export default function Home() {
               <br />
               It lets you increase productivity, reduce stress and much more.
             </p>
-          </div>
-          {currentOs && (
-            <>
-              <Button
-                onClick={handleDownloadClick}
-                variant="default"
-                className="animation-delay-2 fade-in text-base focus:ring-0 align-bottom shadow-lg shadow-gray-400 dark:shadow-none mt-12"
-                size="lg"
-              >
-                <Icons.apple className="h-4 w-4 mr-2 mb-[2px] fill-current" />
-                <span className="text-[0px] leading-none">
-                  <span className="font-medium text-base leading-none">
-                    Download for {currentOs}
+            {currentOs && (
+              <>
+                <Button
+                  onClick={handleDownloadClick}
+                  variant="default"
+                  className="animation-delay-2 fade-in text-base focus:ring-0 align-bottom shadow-xl shadow-gray-400/50 dark:shadow-none mt-8"
+                  size="lg"
+                >
+                  {osIcon}
+                  <span className="text-[0px] leading-none">
+                    <span className="font-bold text-xl leading-none">
+                      Download for {currentOs}
+                    </span>
                   </span>
-                </span>
-              </Button>
-              {/* 
-                TODO: Add description for each OS
-                v1.49.1 | macOS 11+ | Install via Homebrew
-              */}
-            </>
-          )}
-          {currentCoffeeManUrl && (
-            <Image
-              src={`${currentCoffeeManUrl}`}
-              className="animation-delay-2 fade-in my-24"
-              alt="coffee man"
-              width="400"
-              height="310"
-            />
-          )}
-
+                </Button>
+                {/* 
+                  TODO: Add description for each OS
+                  v1.49.1 | macOS 11+ | Install via Homebrew
+                */}
+              </>
+            )}
+          </div>
           {/* 
             TODO: Replace with interactive app interface
           */}
