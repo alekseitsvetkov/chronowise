@@ -5,16 +5,24 @@
 @tailwind utilities;
 @tailwind variants;
 
+html,
 body {
 	font-family: Inter, sans-serif;
+	background: transparent;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.app {
+	overflow: auto;
 }
 
 .titlebar {
   height: 30px;
-  background:  hsl(var(--color-app));
+  background: transparent;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: hsl(var(--color-app-box));
+  border-bottom-color: transparent;
   user-select: none;
   display: flex;
   justify-content: flex-end;

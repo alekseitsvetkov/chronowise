@@ -28,7 +28,7 @@ export const App: FC = () => {
   });
 
   return (
-    <div className="bg-app h-screen flex flex-col p-4 justify-between pt-12">
+    <div className="bg-transparent h-screen flex flex-col p-4 justify-between pt-12">
       <div className="flex justify-between">
         <div className="hover:cursor-pointer" onClick={reset}>
           <Icons.reset size={20} color="#FFFFFF" />

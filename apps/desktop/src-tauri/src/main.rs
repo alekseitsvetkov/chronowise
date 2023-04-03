@@ -4,7 +4,7 @@
 )]
 
 #[cfg(target_os = "macos")]
-use cocoa::appkit::{NSWindow, NSWindowStyleMask};
+use cocoa::appkit::{NSWindow, NSWindowStyleMask, NSWindowTitleVisibility};
 
 use std::env;
 use std::io::BufReader;
@@ -13,6 +13,8 @@ use tauri::{
   SystemTrayMenuItem, Window, WindowEvent,
 };
 use tauri_plugin_log::LogTarget;
+use window_shadows::set_shadow;
+use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -36,37 +38,45 @@ async fn play_notification_sound(app_handle: tauri::AppHandle) {
 }
 
 pub trait WindowExt {
-  #[cfg(target_os = "macos")]
-  fn set_transparent_titlebar(&self, transparent: bool);
+    #[cfg(target_os = "macos")]
+    fn set_transparent_titlebar(&self, title_transparent: bool, remove_toolbar: bool);
 }
 
 impl<R: Runtime> WindowExt for Window<R> {
-  #[cfg(target_os = "macos")]
-  fn set_transparent_titlebar(&self, transparent: bool) {
-      use cocoa::appkit::NSWindowTitleVisibility;
+    #[cfg(target_os = "macos")]
+    fn set_transparent_titlebar(&self, title_transparent: bool, remove_tool_bar: bool) {
+        unsafe {
+            let id = self.ns_window().unwrap() as cocoa::base::id;
+            NSWindow::setTitlebarAppearsTransparent_(id, cocoa::base::YES);
+            let mut style_mask = id.styleMask();
+            style_mask.set(
+                NSWindowStyleMask::NSFullSizeContentViewWindowMask,
+                title_transparent,
+            );
 
-      unsafe {
-          let id = self.ns_window().unwrap() as cocoa::base::id;
+            if remove_tool_bar {
+                style_mask.remove(
+                    NSWindowStyleMask::NSClosableWindowMask
+                        | NSWindowStyleMask::NSMiniaturizableWindowMask
+                        | NSWindowStyleMask::NSResizableWindowMask,
+                );
+            }
 
-          let mut style_mask = id.styleMask();
-          style_mask.set(
-              NSWindowStyleMask::NSFullSizeContentViewWindowMask,
-              transparent,
-          );
-          id.setStyleMask_(style_mask);
+            id.setStyleMask_(style_mask);
 
-          id.setTitleVisibility_(if transparent {
-              NSWindowTitleVisibility::NSWindowTitleHidden
-          } else {
-              NSWindowTitleVisibility::NSWindowTitleVisible
-          });
-          id.setTitlebarAppearsTransparent_(if transparent {
-              cocoa::base::YES
-          } else {
-              cocoa::base::NO
-          });
-      }
-  }
+            id.setTitleVisibility_(if title_transparent {
+                NSWindowTitleVisibility::NSWindowTitleHidden
+            } else {
+                NSWindowTitleVisibility::NSWindowTitleVisible
+            });
+
+            id.setTitlebarAppearsTransparent_(if title_transparent {
+                cocoa::base::YES
+            } else {
+                cocoa::base::NO
+            });
+        }
+    }
 }
 
 fn create_system_tray() -> SystemTray {
@@ -84,14 +94,24 @@ fn create_system_tray() -> SystemTray {
 fn main() {
   tauri::Builder::default()
       .setup(|app| {
+        let window = app.get_window("main").unwrap();
         //   #[cfg(target_os = "macos")]
         //   app.set_activation_policy(tauri::ActivationPolicy::Accessory);
-          
-          let win = app.get_window("main").unwrap();
-          #[cfg(target_os = "macos")]
-          win.set_transparent_titlebar(true);
 
-          Ok(())
+        #[cfg(any(windows, target_os = "macos"))]
+        set_shadow(&window, true).unwrap();
+
+        #[cfg(target_os = "macos")]
+        apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None).expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
+
+        #[cfg(target_os = "windows")]
+        apply_blur(&window, Some((18, 18, 18, 125))).expect("Unsupported platform! 'apply_blur' is only supported on Windows");
+
+        let win = app.get_window("main").unwrap();
+        #[cfg(target_os = "macos")]
+        win.set_transparent_titlebar(true, false);
+
+        Ok(())
       })
       .system_tray(create_system_tray())
       .on_system_tray_event(|app, event| match event {
