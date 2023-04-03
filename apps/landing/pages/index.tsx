@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <>
       <RootLayout>
-        <div className="flex w-full flex-col items-center mb-16 2xl:mt-32 xl:mt-28 lg:mt-20 md:mt-18 sm:mt-20 mt-16">
+        <div className="flex w-full flex-col items-center mb-16 2xl:mt-32 xl:mt-24 lg:mt-20 md:mt-18 sm:mt-20 mt-16">
           {!!coffeeManImage &&
             <Image
               priority
