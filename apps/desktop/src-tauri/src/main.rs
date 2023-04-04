@@ -102,8 +102,8 @@ fn main() {
           window.close_devtools();
         }
 
-        // #[cfg(target_os = "macos")]
-        // window.set_decorations(true).unwrap();
+        #[cfg(target_os = "windows")]
+        window.set_decorations(false).unwrap();
 
         //  #[cfg(target_os = "macos")]
         //  app.set_activation_policy(tauri::ActivationPolicy::Accessory);
