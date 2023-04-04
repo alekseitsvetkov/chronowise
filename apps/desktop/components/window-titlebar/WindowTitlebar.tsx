@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
+import { isBrowser } from '@/constants'
 
 export function WindowTitlebar() {
   const [appWindow, setAppWindow] = useState<any>()
-  const [platform, setPlatform] = useState<any>()
+  const [os, setOs] = useState<any>()
   const [isMacOS, setIsMacOS] = useState<boolean>(false)
 
   function windowMinimize() {
@@ -23,38 +24,41 @@ export function WindowTitlebar() {
     const appWindow = (await import('@tauri-apps/api/window')).appWindow
     setAppWindow(appWindow)
   }
-
-  async function setupPlatform() {
-    const {platform} = (await import('@tauri-apps/api/os'))
-    setPlatform(platform)
-  }
+  
+  const setupPlatform = useCallback(async () => {
+    const os = (await import('@tauri-apps/api/os'))
+    setOs(os)
+  }, [])
 
   useEffect(() => {
-    setupAppWindow()
-    setupPlatform()
-  }, []) 
+      setupAppWindow()
+      setupPlatform()
+  }, [setupPlatform]) 
 
   useEffect(() => {
     async function checkOS() {
-      if (platform === 'darwin') {
+      if (os.platform() === 'darwin') {
         setIsMacOS(true)
       }
     }
-    checkOS()
-  }, [])
+    
+    if(!isBrowser) {
+      checkOS()
+    }
+  }, [os])
 
   return (
     <>
       {!isMacOS && (
-        <div data-tauri-drag-region className="titlebar bg-transparent">
+        <div data-tauri-drag-region className="titlebar">
           <div onClick={windowMinimize} className="titlebar-button hover:cursor-pointer" id="titlebar-minimize">
-            <Image src="https://api.iconify.design/mdi:window-minimize.svg?color=white" alt="minimize" />
+            <Image src="https://api.iconify.design/mdi:window-minimize.svg?color=white" alt="minimize" width="16" height="16" />
           </div>
           <div className="titlebar-button hover:cursor-pointer" id="titlebar-maximize">
-            <Image src="https://api.iconify.design/mdi:window-maximize.svg?color=gray" alt="maximize" />
+            <Image src="https://api.iconify.design/mdi:window-maximize.svg?color=gray" alt="maximize" width="16" height="16" />
           </div>
           <div onClick={windowHide} className="titlebar-button titlebar-button--close hover:cursor-pointer" id="titlebar-close">
-            <Image src="https://api.iconify.design/mdi:close.svg?color=white" alt="close" />
+            <Image src="https://api.iconify.design/mdi:close.svg?color=white" alt="close" width="16" height="16" />
           </div>
         </div>
       )}

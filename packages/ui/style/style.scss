@@ -12,7 +12,7 @@ body {
 
 .titlebar {
   height: 30px;
-  background: transparent;
+  background: hsl(var(--color-app));;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: transparent;

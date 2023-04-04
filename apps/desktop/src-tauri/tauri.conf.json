@@ -23,7 +23,8 @@
         "all": false,
         "close": true,
         "show": true,
-        "startDragging": true
+        "startDragging": true,
+        "setDecorations": true
       },
       "path": {
         "all": true
@@ -93,12 +94,10 @@
         "resizable": false,
         "title": "chronowise",
         "width": 300,
-        "height": 270,
-        "decorations": true,
+        "height": 240,
+        "decorations": false,
         "fileDropEnabled": true,
-        "titleBarStyle": "Overlay",
-        "hiddenTitle": true,
-        "transparent": true
+        "titleBarStyle": "Overlay"
       }
     ],
     "systemTray": {

@@ -14,7 +14,6 @@ use tauri::{
 };
 use tauri_plugin_log::LogTarget;
 use window_shadows::set_shadow;
-use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -95,21 +94,14 @@ fn main() {
   tauri::Builder::default()
       .setup(|app| {
         let window = app.get_window("main").unwrap();
-        //   #[cfg(target_os = "macos")]
-        //   app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+        //  #[cfg(target_os = "macos")]
+        //  app.set_activation_policy(tauri::ActivationPolicy::Accessory);
 
         #[cfg(any(windows, target_os = "macos"))]
         set_shadow(&window, true).unwrap();
 
         #[cfg(target_os = "macos")]
-        apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None).expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
-
-        #[cfg(target_os = "windows")]
-        apply_blur(&window, Some((18, 18, 18, 125))).expect("Unsupported platform! 'apply_blur' is only supported on Windows");
-
-        let win = app.get_window("main").unwrap();
-        #[cfg(target_os = "macos")]
-        win.set_transparent_titlebar(true, false);
+        window.set_transparent_titlebar(true, false);
 
         Ok(())
       })
