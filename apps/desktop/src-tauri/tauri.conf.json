@@ -87,7 +87,6 @@
         "installMode": "passive"
       }
     },
-    "macOSPrivateApi": true,
     "windows": [
       {
         "fullscreen": false,
@@ -95,7 +94,7 @@
         "title": "chronowise",
         "width": 300,
         "height": 240,
-        "decorations": false,
+        "decorations": true,
         "fileDropEnabled": true,
         "titleBarStyle": "Overlay"
       }

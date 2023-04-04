@@ -94,6 +94,17 @@ fn main() {
   tauri::Builder::default()
       .setup(|app| {
         let window = app.get_window("main").unwrap();
+        
+        #[cfg(debug_assertions)]
+        {
+          let window = app.get_window("main").unwrap();
+          window.open_devtools();
+          window.close_devtools();
+        }
+
+        // #[cfg(target_os = "macos")]
+        // window.set_decorations(true).unwrap();
+
         //  #[cfg(target_os = "macos")]
         //  app.set_activation_policy(tauri::ActivationPolicy::Accessory);
 
