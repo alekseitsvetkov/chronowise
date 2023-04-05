@@ -21,6 +21,13 @@ struct Payload {
   cwd: String,
 }
 
+#[tauri::command(async)]
+async fn app_ready(app_handle: tauri::AppHandle) {
+	let window = app_handle.get_window("main").unwrap();
+
+	window.show().unwrap();
+}
+
 #[tauri::command]
 async fn play_notification_sound(app_handle: tauri::AppHandle) {
   let resource_path = app_handle
@@ -145,7 +152,10 @@ fn main() {
           },
           _ => {}
       })
-      .invoke_handler(tauri::generate_handler![play_notification_sound])
+      .invoke_handler(tauri::generate_handler![
+        app_ready,
+        play_notification_sound
+      ])
       .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
           println!("{}, {argv:?}, {cwd}", app.package_info().name);
 
