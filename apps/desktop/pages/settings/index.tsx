@@ -1,8 +1,8 @@
 "use client"
 
-import { App } from '@/components'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export const metadata = {
   title: 'Chronowise',
@@ -11,7 +11,21 @@ export const metadata = {
 
 export default function Home() {
   const router = useRouter()
-  
+  const [tauriWindow, setTauriWindow] = useState<any>();
+
+  async function setupAppWindow() {
+		const tauriWindow = (await import('@tauri-apps/api/window'));
+		setTauriWindow({appWindow: tauriWindow.appWindow, LogicalSize: tauriWindow.LogicalSize});
+	}
+
+  useEffect(() => {
+    setupAppWindow();
+  }, [])
+
+  useEffect(() => {
+    tauriWindow && tauriWindow.appWindow.setSize(new tauriWindow.LogicalSize(600, 500));
+  }, [tauriWindow])
+
   return (
     <>
       <Head>

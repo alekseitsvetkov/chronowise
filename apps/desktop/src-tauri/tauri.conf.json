@@ -24,7 +24,10 @@
         "close": true,
         "show": true,
         "startDragging": true,
-        "setDecorations": true
+        "setDecorations": true,
+        "setAlwaysOnTop": true,
+        "setResizable": true,
+        "setSize": true
       },
       "path": {
         "all": true
