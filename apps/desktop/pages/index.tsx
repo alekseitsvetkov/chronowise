@@ -1,6 +1,6 @@
 "use client"
 
-import { App } from '@/components'
+import { App } from '@/components';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 

@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <SettingsLayout>
-      <div>settings/general</div>
+      <div>settings/appearance</div>
     </SettingsLayout>
   );
 }

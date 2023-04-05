@@ -1,4 +1,5 @@
 import {
+  type Icon as LucideIcon,
   Play,
   Pause,
   RefreshCcw,
@@ -6,16 +7,17 @@ import {
   MoreVertical,
   MoreHorizontal,
   BellRing,
-  type Icon as LucideIcon,
   LucideProps,
   SunMedium,
   Moon,
   Laptop,
+  ArrowLeft,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+  arrowLeft: ArrowLeft,
   play: Play,
   pause: Pause,
   reset: RefreshCcw,

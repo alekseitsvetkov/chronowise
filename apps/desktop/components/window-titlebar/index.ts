@@ -1,1 +1,1 @@
-export * from './WindowTitlebar'
+export * from './window-titlebar'
