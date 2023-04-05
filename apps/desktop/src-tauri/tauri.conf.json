@@ -93,7 +93,7 @@
         "resizable": false,
         "title": "chronowise",
         "width": 300,
-        "height": 220,
+        "height": 240,
         "decorations": true,
         "fileDropEnabled": true,
         "titleBarStyle": "Overlay"
