@@ -19,7 +19,7 @@ export function SettingsNav({ items }: SettingsNavProps) {
   }
 
   return (
-    <nav className="grid items-start gap-2">
+    <nav className="items-start">
       <div className="flex hover:cursor-pointer items-center mb-4" onClick={() => router.push("../")}>
         <Icons.arrowLeft className="w-5 h-5 text-white mr-2" />
         <span className="text-white text-base">Settings</span>

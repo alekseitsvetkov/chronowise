@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { settingsConfig } from "@/config/settings"
 import { SettingsNav } from "@/components/nav"
 
@@ -9,18 +8,14 @@ interface SettingsLayoutProps {
 export function SettingsLayout({
   children,
 }: SettingsLayoutProps) {
-
-
   return (
-    <div className="mx-auto flex flex-col space-y-6 pt-12 pb-4">
-      <div className="container grid gap-12 md:grid-cols-[200px_1fr]">
-        <aside className="hidden w-[200px] flex-col md:flex">
-          <SettingsNav items={settingsConfig.sidebarNav} />
-        </aside>
-        <main className="flex w-full flex-1 flex-col overflow-hidden text-white">
-          {children}
-        </main>
-      </div>
+    <div className="flex flex-row h-screen overflow-hidden text-gray-900 select-none dark:text-white pt-8">
+      <aside className="flex flex-col flex-grow-0 flex-shrink-0 w-48 min-h-full px-2.5 overflow-x-hidden overflow-y-scroll border-r border-gray-900 no-scrollbar bg-gray-800 dark:bg-gray-850 dark:border-gray-600 py-4">
+        <SettingsNav items={settingsConfig.sidebarNav} />
+      </aside>
+      <main className="flex flex-col w-full min-h-full text-white p-4">
+        {children}
+      </main>
     </div>
   )
 }
