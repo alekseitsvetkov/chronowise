@@ -12,10 +12,6 @@ body {
 
 .titlebar {
   height: 30px;
-  background: hsl(var(--color-app));;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: transparent;
   user-select: none;
   display: flex;
   justify-content: flex-end;
@@ -131,4 +127,14 @@ body {
 .backdrop-blur {
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
+}
+
+.no-scrollbar {
+	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+	scrollbar-width: none; /* for Firefox */
+	overflow-y: scroll;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
 }
