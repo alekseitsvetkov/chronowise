@@ -1,11 +1,9 @@
 "use client"
 
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { SettingsLayout } from '@/components'
 
 export default function Home() {
-  const router = useRouter()
   const [tauriWindow, setTauriWindow] = useState<any>();
 
   async function setupAppWindow() {

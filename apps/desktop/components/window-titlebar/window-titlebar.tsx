@@ -35,6 +35,7 @@ export function WindowTitlebar() {
 	}, [setupPlatform]);
 
 	useEffect(() => {
+
 		async function checkOS() {
 			const platform = os && (await os.platform());
 
@@ -47,7 +48,7 @@ export function WindowTitlebar() {
 	}, [os]);
 
 	return (
-		<div data-tauri-drag-region className="titlebar">
+		<div data-tauri-drag-region className="titlebar bg-gray-800 border-b border-gray-600">
 			{!isMacOS && (
 				<>
 					<div
