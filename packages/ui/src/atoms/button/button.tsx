@@ -55,8 +55,8 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
 					buttonVariants({ variant, size, className }),
 					`${SF_PRO_DISPLAY.variable} font-sans tracking-wide`
 				)}
-				ref={ref}
-				{...props}
+				ref={ref as any}
+				{...props as ButtonProps}
 			/>
 		);
 	}
