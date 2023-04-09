@@ -22,6 +22,9 @@ tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", br
 window-shadows = "0.2.1"
 log = "0.4.17"
 rodio = "0.17.1"
+tokio = "1.27.0"
+thiserror = "1.0.40"
+serde_with_macros = "2.3.2"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.24"
@@ -30,7 +33,7 @@ objc = "0.2.7"
 [features]
 # by default Tauri runs in production mode
 # when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
-default = [ "custom-protocol" ]
+default = ["custom-protocol"]
 # this feature is used for production builds where `devPath` points to the filesystem
 # DO NOT remove this
-custom-protocol = [ "tauri/custom-protocol" ]
+custom-protocol = ["tauri/custom-protocol"]

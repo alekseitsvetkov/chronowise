@@ -1,14 +1,22 @@
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Clone)]
 pub enum SessionType {
     Focus,
     Break,
     LongBreak,
 }
 
+#[derive(Serialize, Deserialize, Clone)]
 pub struct TimerState {
     pub is_running: bool,
     pub session_type: SessionType,
-    pub session_time: u32,
-    pub remaining_time: u32,
+}
+
+#[derive(Deserialize)]
+pub struct TimerStateForUpdate {
+    pub is_running: Option<bool>,
+    pub session_type: Option<SessionType>,
 }
 
 impl Default for TimerState {
@@ -16,8 +24,6 @@ impl Default for TimerState {
         Self {
             is_running: false,
             session_type: SessionType::Focus,
-            session_time: 1_500_000,
-            remaining_time: 1_500_000,
         }
     }
 }
