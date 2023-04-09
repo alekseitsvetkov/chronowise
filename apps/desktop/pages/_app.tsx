@@ -11,8 +11,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Suspense>
       <ErrorBoundary fallbackRender={ErrorFallback}>
-      <WindowTitlebar />
-      <Component {...pageProps} />
+        <WindowTitlebar />
+        <Component {...pageProps} />
       </ErrorBoundary>
     </Suspense>
   )
