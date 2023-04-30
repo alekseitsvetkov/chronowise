@@ -32,10 +32,9 @@ Chronowise is an open source cross-platform focus timer.
 ### Apps:
 
 - `desktop`: A [Tauri](https://tauri.studio) app.
-- `landing`: A [React](https://reactjs.org) app using Vite SSR & Vite pages.
+- `landing`: A [Next.js](https://nextjs.org/) app.
 
 ### Packages:
 
 - `ui`: A [React](https://reactjs.org) Shared component library.
-- `interface`: The complete user interface in React (used by apps `desktop` and `landing`)
 - `config`: `eslint` configurations (includes `eslint-config-next`, `eslint-config-prettier` and all `tsconfig.json` configs used throughout the monorepo.
